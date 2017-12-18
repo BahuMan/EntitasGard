@@ -3,5 +3,5 @@
 [Flags]
 public enum HexPassable
 {
-    N, NW, SW, S, SE, NE
+    N = 1, NW = 2, SW = 4, S = 8, SE = 16, NE = 32
 }

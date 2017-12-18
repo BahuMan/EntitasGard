@@ -8,14 +8,25 @@ public class HexGridBehaviour : MonoBehaviour
     public float cellsize = 1;
     public HexCellBehaviour _prefab;
     public const int HEXMASK = 1 >> 8;
+    public float _chanceForPassage = .4f;
 
     [SerializeField]
     private HexCellBehaviour[,] _grid;
     private const float SQRT3 = 1.7320508075688772935274463415058723669428052538103806280f;
     private HexCellBehaviour lastHex = null;
 
+    private Dictionary<HexPassable, Vector3> cubeNeighboursCoordinates; 
+    
     private void Start()
     {
+        cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>(10);
+        cubeNeighboursCoordinates[HexPassable.N] = new Vector3(0, 1, -1);
+        cubeNeighboursCoordinates[HexPassable.NE] = new Vector3(1, 0, -1);
+        cubeNeighboursCoordinates[HexPassable.SE] = new Vector3(1, -1, 0);
+        cubeNeighboursCoordinates[HexPassable.S] = new Vector3(0, -1, 1);
+        cubeNeighboursCoordinates[HexPassable.SW] = new Vector3(-1, 0, 1);
+        cubeNeighboursCoordinates[HexPassable.NW] = new Vector3(-1, 1, 0);
+
         CreateGrid();
     }
 
@@ -34,8 +45,64 @@ public class HexGridBehaviour : MonoBehaviour
                 if (lastHex != null)
                 {
                     lastHex.SetHighLight(true);
+                    StartCoroutine(LightUpNeighbours(lastHex));
                 }
             }
+        }
+    }
+
+    private System.Collections.IEnumerator LightUpNeighbours(HexCellBehaviour cell)
+    {
+        HexCellBehaviour n;
+
+        n = GetNeighbour(cell, HexPassable.N);
+        if (n != null)
+        {
+            Debug.Log("North");
+            n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
+        }
+        n = GetNeighbour(cell, HexPassable.NE);
+        if (n != null)
+        {
+            Debug.Log("North East");
+            if (n != null) n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
+        }
+
+        n = GetNeighbour(cell, HexPassable.SE);
+        if (n != null)
+        {
+            Debug.Log("South East");
+            n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
+        }
+        n = GetNeighbour(cell, HexPassable.S);
+        if (n != null)
+        {
+            Debug.Log("South");
+            n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
+        }
+        n = GetNeighbour(cell, HexPassable.SW);
+        if (n != null)
+        {
+            Debug.Log("South West");
+            n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
+        }
+        n = GetNeighbour(cell, HexPassable.NW);
+        if (n != null)
+        {
+            Debug.Log("North West");
+            n.SetHighLight(true);
+            yield return new WaitForSeconds(1f);
+            n.SetHighLight(false);
         }
     }
 
@@ -53,7 +120,7 @@ public class HexGridBehaviour : MonoBehaviour
             for (int gy = Math.Max(-size, -gx - size); gy <= Math.Min(size, -gx + size); ++gy)
             {
                 HexCellBehaviour cell = Instantiate(_prefab);
-                _grid[size+gx, size+gy] = cell;
+                SetCell(gx, gy, cell);
                 cube.x = ax.x = gx;
                 cube.y = ax.y = gy;
                 cube.z = -gx - gy;
@@ -61,6 +128,89 @@ public class HexGridBehaviour : MonoBehaviour
                 cell.transform.position = hex_to_pixel(ax);
                 cell.transform.SetParent(this.transform);
             }
+        }
+    }
+
+    [ContextMenu("Create Maze")]
+    public void CreateMaze()
+    {
+
+        //mark all cells as "not visited"
+        bool[,] visited = new bool[2 * size + 1, 2 * size + 1];
+        for (int q=0; q<2*size+1; ++q)
+            for (int r=0; r<2*size+1; ++r)
+                visited[q, r] = false;
+
+        //pick a random cell (withing range 'size') to start from:
+        int rx = UnityEngine.Random.Range(-size, size);
+        int ry = UnityEngine.Random.Range(Math.Max(-size, -rx - size), Math.Min(size, -rx + size));
+        HexCellBehaviour randomCell = GetCell(rx, ry);
+
+        //recursively call this function to make passage ways:
+        MazeRun(randomCell, ref visited);
+    }
+
+    private void MazeRun(HexCellBehaviour cell, ref bool[,] visited)
+    {
+        Vector2 axial =  this.cube_to_axial(cell.cubeCoordinates);
+        int aq = Mathf.RoundToInt(axial.x);
+        int ar = Mathf.RoundToInt(axial.y);
+
+        visited[aq, ar] = true; //mark visited
+
+        List<HexCellBehaviour> CandidateNeighbors = new List<HexCellBehaviour>(6);
+
+        foreach (HexPassable d in Enum.GetValues(typeof(HexPassable)))
+        {
+            Vector3 ncube = cubeNeighboursCoordinates[d];
+            ncube += cell.cubeCoordinates;
+
+            if (IsOutOfBounds(ncube)) continue; //not interested in neighbours out of bounds
+
+            Vector2 naxial = this.cube_to_axial(ncube);
+            int naq = Mathf.RoundToInt(axial.x);
+            int nar = Mathf.RoundToInt(axial.y);
+
+            if (visited[naq, nar]) continue; //not interested in already visited neighbours
+
+            //we are interested:
+            CandidateNeighbors.Add(GetCell(ncube));
+
+        }
+
+        //nothing interesting? we're done
+        if (CandidateNeighbors.Count == 0) return;
+
+        //from viable candidates, choose 1 direction to continue:
+        int chosen = UnityEngine.Random.Range(0, CandidateNeighbors.Count);
+        CreatePathWay(cell, CandidateNeighbors[chosen]);
+        MazeRun(CandidateNeighbors[chosen], ref visited);
+    }
+
+    private void CreatePathWay(HexCellBehaviour cell, HexCellBehaviour neighbour)
+    {
+        Vector3 diff = cell.cubeCoordinates - neighbour.cubeCoordinates;
+        int dx = Mathf.RoundToInt(diff.x);
+        int dy = Mathf.RoundToInt(diff.y);
+        int dz = Mathf.RoundToInt(diff.z);
+
+
+    }
+
+    public HexCellBehaviour GetNeighbour(HexCellBehaviour cell, HexPassable dir)
+    {
+        Vector3 vd = cubeNeighboursCoordinates[dir];
+        vd += cell.cubeCoordinates;
+        if (IsOutOfBounds(vd)) return null;
+        else return GetCell(vd);
+    }
+
+    public IEnumerator<HexCellBehaviour> GetAllNeighbours(Vector3 cube)
+    {
+        foreach(HexPassable d in Enum.GetValues(typeof(HexPassable)))
+        {
+            Vector3 c = cubeNeighboursCoordinates[d] + cube;
+            if (!IsOutOfBounds(c)) yield return GetCell(c);
         }
     }
 
@@ -118,6 +268,11 @@ public class HexGridBehaviour : MonoBehaviour
         return _grid[size + x, size + y];
     }
 
+    public void SetCell(int x, int y, HexCellBehaviour cell)
+    {
+        _grid[size + x, size + y] = cell;
+    }
+
     public HexCellBehaviour GetCell(Vector3 cube)
     {
         return GetCell((int)cube.x, (int)cube.y);
@@ -128,4 +283,25 @@ public class HexGridBehaviour : MonoBehaviour
         _grid[size + (int)cube.x, size + (int)cube.y] = c;
     }
 
+    public int DistanceBetween(Vector3 a, Vector3 b)
+    {
+        int dx = Math.Abs(Mathf.RoundToInt(a.x) - Mathf.RoundToInt(b.x));
+        int dy = Math.Abs(Mathf.RoundToInt(a.y) - Mathf.RoundToInt(b.y));
+        int dz = Math.Abs(Mathf.RoundToInt(a.z) - Mathf.RoundToInt(b.z));
+        return Math.Max(Math.Max(dx, dy), Math.Max(dx, dz));
+    }
+
+    public int DistanceFromCenter(Vector3 cube)
+    {
+        int x = Math.Abs(Mathf.RoundToInt(cube.x));
+        int y = Math.Abs(Mathf.RoundToInt(cube.y));
+        int z = Math.Abs(Mathf.RoundToInt(cube.z));
+        return ((x + y + z) / 2);
+    }
+    public bool IsOutOfBounds(Vector3 cube)
+    {
+        int dist = DistanceFromCenter(cube);
+        Debug.Log("Distance = " + dist);
+        return dist > size;
+    }
 }
