@@ -182,7 +182,7 @@ MonoBehaviour:
   size: 5
   cellsize: 1
   _prefab: {fileID: 114939588869012736, guid: 68970544cb42b234584732a0c0697be2, type: 2}
-  _chanceForPassage: 0.4
+  _chanceForPassage: 0
 --- !u!4 &367757352
 Transform:
   m_ObjectHideFlags: 0
@@ -334,10 +334,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 603180109}
-  m_LocalRotation: {x: 0.38437587, y: 0, z: 0, w: 0.9231767}
+  m_LocalRotation: {x: 0.47715867, y: 0, z: 0, w: 0.8788172}
   m_LocalPosition: {x: 0, y: 10, z: -9.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45.21, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 57, y: 0, z: 0}

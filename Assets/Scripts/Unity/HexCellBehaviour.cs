@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using General;
+using System;
 
 [SelectionBase]
 public class HexCellBehaviour : MonoBehaviour {
@@ -30,28 +31,48 @@ public class HexCellBehaviour : MonoBehaviour {
 
     private void OnValidate()
     {
-        _N.gameObject.SetActive(CanGo(HexPassable.N));
-        _NE.gameObject.SetActive(CanGo(HexPassable.NE));
-        _NW.gameObject.SetActive(CanGo(HexPassable.NW));
-        _S.gameObject.SetActive(CanGo(HexPassable.S));
-        _SW.gameObject.SetActive(CanGo(HexPassable.SW));
-        _SE.gameObject.SetActive(CanGo(HexPassable.SE));
+        MakePassableVisible();
     }
+
+    private void MakePassableVisible()
+    {
+        _N.gameObject.SetActive(!CanGo(HexPassable.N));
+        _NE.gameObject.SetActive(!CanGo(HexPassable.NE));
+        _NW.gameObject.SetActive(!CanGo(HexPassable.NW));
+        _S.gameObject.SetActive(!CanGo(HexPassable.S));
+        _SW.gameObject.SetActive(!CanGo(HexPassable.SW));
+        _SE.gameObject.SetActive(!CanGo(HexPassable.SE));
+    }
+
     public bool CanGo(HexPassable dir)
     {
         return (dir & _hexPassable) == dir;
     }
+
     public void AllowGo(HexPassable dir)
     {
         _hexPassable |= dir;
+        MakePassableVisible();
     }
 
     public void BlockGo(HexPassable dir) {
         _hexPassable &= ~dir;
+        MakePassableVisible();
     }
 
     public void SetHighLight(bool hi)
     {
         _model.material = hi ? _highLight : _standard;
+    }
+
+    [ContextMenu("Print Passable enum")]
+    public void printPassable()
+    {
+        Debug.Log("passable = " + Convert.ToString((int)this._hexPassable, 2));
+
+        foreach (HexPassable dir in Enum.GetValues(typeof(HexPassable)))
+        {
+            Debug.Log("Can go " + dir + " = " + CanGo(dir));
+        }
     }
 }
