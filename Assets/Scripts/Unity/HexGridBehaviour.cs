@@ -92,6 +92,7 @@ public class HexGridBehaviour : MonoBehaviour
         {
             HexCellBehaviour current = queue.Dequeue();
             LightPath(from, current, true, parent);
+            Debug.Log("Next node: " + current.cubeCoordinates);
             yield return new WaitForSeconds(.3f);
             if (current == to)
             {
@@ -99,7 +100,7 @@ public class HexGridBehaviour : MonoBehaviour
                 break;
             }
 
-            //find all neighbours
+            //find all (unvisited) neighbours
             unvisitedNeighbours.Clear();
             foreach (HexPassable dir in Enum.GetValues(typeof(HexPassable)))
             {
@@ -107,7 +108,14 @@ public class HexGridBehaviour : MonoBehaviour
                 Vector3 cube = current.cubeCoordinates + cubeNeighboursCoordinates[dir];
                 if (IsOutOfBounds(cube)) continue;
                 HexCellBehaviour neighbour = GetCell(cube);
-                if (!cost.ContainsKey(neighbour) || cost[neighbour] < (cost[current]+1))
+                if (!cost.ContainsKey(neighbour))
+                {
+                    queue.Enqueue(neighbour);
+                    unvisitedNeighbours.Add(neighbour);
+                    cost[neighbour] = cost[current] + 1;
+                    parent[neighbour] = current;
+                }
+                if (cost[neighbour] > (cost[current] + 1))
                 {
                     queue.Enqueue(neighbour);
                     unvisitedNeighbours.Add(neighbour);
@@ -119,12 +127,20 @@ public class HexGridBehaviour : MonoBehaviour
             LightPath(from, current, false, parent);
         }
 
-        for (HexCellBehaviour cell = to; cell != from; cell = parent[cell])
+        if (found)
         {
-            this.path.Add(cell);
-            cell.SetHighLight(true);
+            Debug.Log("Found a path!");
+            for (HexCellBehaviour cell = to; cell != from; cell = parent[cell])
+            {
+                this.path.Add(cell);
+                cell.SetHighLight(true);
+            }
+            from.SetHighLight(true);
         }
-        from.SetHighLight(true);
+        else
+        {
+            Debug.Log("Path not found");
+        }
 
     }
 
@@ -287,6 +303,7 @@ public class HexGridBehaviour : MonoBehaviour
 
     }
 
+    //this method sets the HexPassable attribute in both ways between 2 neighbouring cells
     private void CreatePathWay(HexCellBehaviour cell, HexCellBehaviour neighbour)
     {
         HexPassable dir = FindDirection(cell, neighbour);
