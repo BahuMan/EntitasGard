@@ -82,10 +82,10 @@ public class HexGridBehaviour : MonoBehaviour
         this.path.Clear();
         Dictionary<HexCellBehaviour, int> cost = new Dictionary<HexCellBehaviour, int>();
         Dictionary<HexCellBehaviour, HexCellBehaviour> parent = new Dictionary<HexCellBehaviour, HexCellBehaviour>();
-        Queue<HexCellBehaviour> queue = new Queue<HexCellBehaviour>();
+        PriorityQueue<HexCellBehaviour> queue = new PriorityQueue<HexCellBehaviour>();
         List<HexCellBehaviour> unvisitedNeighbours = new List<HexCellBehaviour>();
         cost[from] = 0;
-        queue.Enqueue(from);
+        queue.Enqueue(DistanceBetween(from, to), from);
 
         bool found = false;
         while (queue.Count > 0 && !found)
@@ -108,18 +108,11 @@ public class HexGridBehaviour : MonoBehaviour
                 Vector3 cube = current.cubeCoordinates + cubeNeighboursCoordinates[dir];
                 if (IsOutOfBounds(cube)) continue;
                 HexCellBehaviour neighbour = GetCell(cube);
-                if (!cost.ContainsKey(neighbour))
+                if (!cost.ContainsKey(neighbour) || cost[neighbour] > (cost[current] + 1))
                 {
-                    queue.Enqueue(neighbour);
                     unvisitedNeighbours.Add(neighbour);
                     cost[neighbour] = cost[current] + 1;
-                    parent[neighbour] = current;
-                }
-                if (cost[neighbour] > (cost[current] + 1))
-                {
-                    queue.Enqueue(neighbour);
-                    unvisitedNeighbours.Add(neighbour);
-                    cost[neighbour] = cost[current] + 1;
+                    queue.Enqueue(cost[current] + 1 + DistanceBetween(neighbour, to), neighbour);
                     parent[neighbour] = current;
                 }
             }
@@ -422,6 +415,11 @@ public class HexGridBehaviour : MonoBehaviour
     public void SetCell(Vector3 cube, HexCellBehaviour c)
     {
         _grid[size + (int)cube.x, size + (int)cube.y] = c;
+    }
+
+    public int DistanceBetween(HexCellBehaviour a, HexCellBehaviour b)
+    {
+        return DistanceBetween(a.cubeCoordinates, b.cubeCoordinates);
     }
 
     public int DistanceBetween(Vector3 a, Vector3 b)

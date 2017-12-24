@@ -182,7 +182,7 @@ MonoBehaviour:
   size: 5
   cellsize: 1
   _prefab: {fileID: 114939588869012736, guid: 68970544cb42b234584732a0c0697be2, type: 2}
-  _chanceForPassage: 0
+  _chanceForPassage: 0.3
 --- !u!4 &367757352
 Transform:
   m_ObjectHideFlags: 0
