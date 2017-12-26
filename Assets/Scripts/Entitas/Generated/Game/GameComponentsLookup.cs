@@ -8,17 +8,19 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int DebugMessage = 0;
-    public const int HexGrid = 1;
-    public const int Move = 2;
-    public const int Position = 3;
-    public const int Selectable = 4;
-    public const int StartPosition = 5;
-    public const int Unit = 6;
+    public const int ComponentsGameObject = 0;
+    public const int DebugMessage = 1;
+    public const int HexGrid = 2;
+    public const int Move = 3;
+    public const int Position = 4;
+    public const int Selectable = 5;
+    public const int StartPosition = 6;
+    public const int Unit = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
+        "ComponentsGameObject",
         "DebugMessage",
         "HexGrid",
         "Move",
@@ -29,6 +31,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Components.GameObjectComponent),
         typeof(DebugMessageComponent),
         typeof(HexGridComponent),
         typeof(MoveComponent),

@@ -2,7 +2,7 @@
 
 public class MoveComponent : IComponent
 {
-    float dx, dz;
-    float ry;
+    public float dx, dz;
+    public float ry;
 }
 

@@ -17,11 +17,20 @@ public class HexGridBehaviour : MonoBehaviour
     private const float NEARZERO = 0.0001f;
     private bool[,] visited;
 
-    private Dictionary<HexPassable, Vector3> cubeNeighboursCoordinates;
+    private Dictionary<HexPassable, Vector3> cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>
+    {
+        {HexPassable.N, new Vector3(0, 1, -1)},
+        {HexPassable.NE, new Vector3(1, 0, -1)},
+        {HexPassable.SE, new Vector3(1, -1, 0)},
+        {HexPassable.S, new Vector3(0, -1, 1)},
+        {HexPassable.SW, new Vector3(-1, 0, 1)},
+        {HexPassable.NW, new Vector3(-1, 1, 0) }
+    };
 
     private HexCellBehaviour from, to;
     private List<HexCellBehaviour> path = new List<HexCellBehaviour>();
     
+    /* all of this code is now done in the editor/inspector, not at runtime:
     private void Start()
     {
         cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>(10);
@@ -33,7 +42,9 @@ public class HexGridBehaviour : MonoBehaviour
         cubeNeighboursCoordinates[HexPassable.NW] = new Vector3(-1, 1, 0);
 
         CreateGrid();
+        CreateMaze();
     }
+    */
 
     private void Update()
     {
@@ -242,16 +253,12 @@ public class HexGridBehaviour : MonoBehaviour
         HexCellBehaviour randomCell = GetCell(rx, ry);
 
         //recursively call this function to make passage ways:
-        StartCoroutine(MazeRun(randomCell));
+        MazeRun(randomCell);
     }
 
     //recursive procedure to create a maze
-    private System.Collections.IEnumerator MazeRun(HexCellBehaviour cell)
+    private void MazeRun(HexCellBehaviour cell)
     {
-        cell.SetHighLight(true);
-        yield return new WaitForSeconds(.2f);
-        cell.SetHighLight(false);
-
         Vector2 axial =  this.cube_to_axial(cell.cubeCoordinates);
         int aq = Mathf.RoundToInt(axial.x);
         int ar = Mathf.RoundToInt(axial.y);
@@ -284,7 +291,7 @@ public class HexGridBehaviour : MonoBehaviour
             if (!visited[size + naq, size + nar])
             {
                 CreatePathWay(cell, chosen);
-                yield return MazeRun(chosen);
+                MazeRun(chosen);
             }
             else if (UnityEngine.Random.Range(0f, 1f) < _chanceForPassage)
             {
@@ -414,7 +421,7 @@ public class HexGridBehaviour : MonoBehaviour
 
     public void SetCell(Vector3 cube, HexCellBehaviour c)
     {
-        _grid[size + (int)cube.x, size + (int)cube.y] = c;
+        SetCell((int)cube.x, (int)cube.y, c);
     }
 
     public int DistanceBetween(HexCellBehaviour a, HexCellBehaviour b)
