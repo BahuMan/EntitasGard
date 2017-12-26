@@ -12,7 +12,7 @@ public class HexGridBehaviour : MonoBehaviour
     public float _chanceForPassage = .4f;
 
     [SerializeField]
-    private HexCellBehaviour[,] _grid;
+    private HexCellBehaviour[] _grid;
     private const float SQRT3 = 1.7320508075688772935274463415058723669428052538103806280f;
     private const float NEARZERO = 0.0001f;
     private bool[,] visited;
@@ -215,7 +215,7 @@ public class HexGridBehaviour : MonoBehaviour
     [ContextMenu("Create Grid")]
     public void CreateGrid()
     {
-        _grid = new HexCellBehaviour[2 * size + 1, 2 * size + 1];
+        _grid = new HexCellBehaviour[(2 * size + 1) * (2 * size + 1)];
 
         //two temp variables to calculate the cell's coordinates:
         Vector2 ax = new Vector2();
@@ -406,12 +406,12 @@ public class HexGridBehaviour : MonoBehaviour
 
     public HexCellBehaviour GetCell(int x, int y)
     {
-        return _grid[size + x, size + y];
+        return _grid[size + x  + (2*size+1) *(size + y)];
     }
 
     public void SetCell(int x, int y, HexCellBehaviour cell)
     {
-        _grid[size + x, size + y] = cell;
+        _grid[size + x + (2 * size + 1) * (size + y)] = cell;
     }
 
     public HexCellBehaviour GetCell(Vector3 cube)
