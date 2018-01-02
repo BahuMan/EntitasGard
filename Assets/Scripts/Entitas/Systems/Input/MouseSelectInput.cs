@@ -55,7 +55,7 @@ namespace Systems.Input
                 Debug.Log("Checking " + _selectableUnits.count + " selectable units");
                 foreach (var unit in _selectableUnits)
                 {
-                    Vector3 screencoordinates = UnityEngine.Camera.main.WorldToScreenPoint(unit.componentsGameObject.value.transform.position);
+                    Vector3 screencoordinates = UnityEngine.Camera.main.WorldToScreenPoint(unit.gameObject.value.transform.position);
                     if (minx < screencoordinates.x && screencoordinates.x < maxx
                         && miny < screencoordinates.y && screencoordinates.y < maxy)
                     {

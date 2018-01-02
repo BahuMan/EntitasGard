@@ -11,11 +11,10 @@ public class HexGridBehaviour : MonoBehaviour
     public const int HEXMASK = 1 >> 8;
     public float _chanceForPassage = .4f;
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private HexCellBehaviour[] _grid;
     private const float SQRT3 = 1.7320508075688772935274463415058723669428052538103806280f;
     private const float NEARZERO = 0.0001f;
-    private bool[,] visited;
 
     private Dictionary<HexPassable, Vector3> cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>
     {
@@ -27,8 +26,8 @@ public class HexGridBehaviour : MonoBehaviour
         {HexPassable.NW, new Vector3(-1, 1, 0) }
     };
 
-    private HexCellBehaviour from, to;
-    private List<HexCellBehaviour> path = new List<HexCellBehaviour>();
+    //private HexCellBehaviour from, to;
+    //private List<HexCellBehaviour> path = new List<HexCellBehaviour>();
     
     /* all of this code is now done in the editor/inspector, not at runtime:
     private void Start()
@@ -46,6 +45,7 @@ public class HexGridBehaviour : MonoBehaviour
     }
     */
 
+    /* listening to mouse and keyboard will be handles in Entitas systems:
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -87,10 +87,11 @@ public class HexGridBehaviour : MonoBehaviour
             StartCoroutine(FindPath(from, to));
         }
     }
+    */
 
-    private IEnumerator FindPath(HexCellBehaviour from, HexCellBehaviour to)
+    private Stack<HexCellBehaviour> FindPath(HexCellBehaviour from, HexCellBehaviour to)
     {
-        this.path.Clear();
+        Stack<HexCellBehaviour> path = new Stack<HexCellBehaviour>();
         Dictionary<HexCellBehaviour, int> cost = new Dictionary<HexCellBehaviour, int>();
         Dictionary<HexCellBehaviour, HexCellBehaviour> parent = new Dictionary<HexCellBehaviour, HexCellBehaviour>();
         PriorityQueue<HexCellBehaviour> queue = new PriorityQueue<HexCellBehaviour>();
@@ -102,9 +103,7 @@ public class HexGridBehaviour : MonoBehaviour
         while (queue.Count > 0 && !found)
         {
             HexCellBehaviour current = queue.Dequeue();
-            LightPath(from, current, true, parent);
             Debug.Log("Next node: " + current.cubeCoordinates);
-            yield return new WaitForSeconds(.3f);
             if (current == to)
             {
                 found = true;
@@ -127,8 +126,6 @@ public class HexGridBehaviour : MonoBehaviour
                     parent[neighbour] = current;
                 }
             }
-
-            LightPath(from, current, false, parent);
         }
 
         if (found)
@@ -136,16 +133,25 @@ public class HexGridBehaviour : MonoBehaviour
             Debug.Log("Found a path!");
             for (HexCellBehaviour cell = to; cell != from; cell = parent[cell])
             {
-                this.path.Add(cell);
-                cell.SetHighLight(true);
+                path.Push(cell);
             }
-            from.SetHighLight(true);
+            path.Push(from);
+            return path;
         }
         else
         {
             Debug.Log("Path not found");
+            return null;
         }
 
+    }
+
+    public void LightPath(IEnumerable<HexCellBehaviour> path, bool lit)
+    {
+        foreach (var cell in path)
+        {
+            cell.SetHighLight(lit);
+        }
     }
 
     private void LightPath(HexCellBehaviour from, HexCellBehaviour to, bool lit, Dictionary<HexCellBehaviour, HexCellBehaviour> parent)
@@ -231,7 +237,7 @@ public class HexGridBehaviour : MonoBehaviour
                 cube.y = ax.y = gy;
                 cube.z = -gx - gy;
                 cell.cubeCoordinates = cube;
-                cell.transform.position = hex_to_pixel(ax);
+                cell.transform.position = axial_to_pixel(ax);
                 cell.transform.SetParent(this.transform);
             }
         }
@@ -242,7 +248,7 @@ public class HexGridBehaviour : MonoBehaviour
     {
 
         //mark all cells as "not visited"
-        visited = new bool[2 * size + 1, 2 * size + 1];
+        bool[,] visited = new bool[2 * size + 1, 2 * size + 1];
         for (int q=0; q<2*size+1; ++q)
             for (int r=0; r<2*size+1; ++r)
                 visited[q, r] = false;
@@ -253,11 +259,11 @@ public class HexGridBehaviour : MonoBehaviour
         HexCellBehaviour randomCell = GetCell(rx, ry);
 
         //recursively call this function to make passage ways:
-        MazeRun(randomCell);
+        MazeRun(randomCell, visited);
     }
 
     //recursive procedure to create a maze
-    private void MazeRun(HexCellBehaviour cell)
+    private void MazeRun(HexCellBehaviour cell, bool[,] visited)
     {
         Vector2 axial =  this.cube_to_axial(cell.cubeCoordinates);
         int aq = Mathf.RoundToInt(axial.x);
@@ -291,7 +297,7 @@ public class HexGridBehaviour : MonoBehaviour
             if (!visited[size + naq, size + nar])
             {
                 CreatePathWay(cell, chosen);
-                MazeRun(chosen);
+                MazeRun(chosen, visited);
             }
             else if (UnityEngine.Random.Range(0f, 1f) < _chanceForPassage)
             {
@@ -355,7 +361,7 @@ public class HexGridBehaviour : MonoBehaviour
         }
     }
 
-    public Vector3 hex_to_pixel(Vector2 hex)
+    public Vector3 axial_to_pixel(Vector2 hex)
     {
         Vector3 r = new Vector3();
         r.x = cellsize * 3 / 2 * hex.x;
@@ -364,7 +370,7 @@ public class HexGridBehaviour : MonoBehaviour
         return r;
     }
 
-    public Vector2 pixel_to_hex(Vector3 pixel) {
+    public Vector2 pixel_to_axial(Vector3 pixel) {
         Vector2 r = new Vector2();
         r.x = pixel.x * 2 / 3 / cellsize;
         r.y = (-pixel.x / 3 + SQRT3 / 3 * pixel.z) / cellsize;

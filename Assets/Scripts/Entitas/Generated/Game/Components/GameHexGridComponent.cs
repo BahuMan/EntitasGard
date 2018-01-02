@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly HexGridComponent hexGridComponent = new HexGridComponent();
+    public HexGridComponent hexGrid { get { return (HexGridComponent)GetComponent(GameComponentsLookup.HexGrid); } }
+    public bool hasHexGrid { get { return HasComponent(GameComponentsLookup.HexGrid); } }
 
-    public bool isHexGrid {
-        get { return HasComponent(GameComponentsLookup.HexGrid); }
-        set {
-            if (value != isHexGrid) {
-                var index = GameComponentsLookup.HexGrid;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : hexGridComponent;
+    public void AddHexGrid(int newRadius) {
+        var index = GameComponentsLookup.HexGrid;
+        var component = CreateComponent<HexGridComponent>(index);
+        component.radius = newRadius;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceHexGrid(int newRadius) {
+        var index = GameComponentsLookup.HexGrid;
+        var component = CreateComponent<HexGridComponent>(index);
+        component.radius = newRadius;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveHexGrid() {
+        RemoveComponent(GameComponentsLookup.HexGrid);
     }
 }
 

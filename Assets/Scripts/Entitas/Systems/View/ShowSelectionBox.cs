@@ -47,14 +47,6 @@ namespace Systems.View
                     }
                     _img.position = new Vector3( r.x, r.y, 0);
                     _img.sizeDelta = new Vector2(r.width, r.height);
-
-                    /*
-                    _line.SetPosition(0, new Vector3(box.selectStart.x, box.selectStart.y));
-                    _line.SetPosition(1, new Vector3(UnityEngine.Input.mousePosition.x, box.selectStart.y));
-                    _line.SetPosition(2, new Vector3(UnityEngine.Input.mousePosition.x, UnityEngine.Input.mousePosition.y));
-                    _line.SetPosition(3, new Vector3(box.selectStart.x, UnityEngine.Input.mousePosition.y));
-                    _line.SetPosition(4, new Vector3(box.selectStart.x, box.selectStart.y));
-                    */
                 }
             }
             else

@@ -8,15 +8,33 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int SelectionBox = 0;
+    public const int ID = 0;
+    public const int MouseHover = 1;
+    public const int MouseLeftClick = 2;
+    public const int MouseOverEntity = 3;
+    public const int MouseRightClick = 4;
+    public const int NavigateCommand = 5;
+    public const int SelectionBox = 6;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
+        "ID",
+        "MouseHover",
+        "MouseLeftClick",
+        "MouseOverEntity",
+        "MouseRightClick",
+        "NavigateCommand",
         "SelectionBox"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(IDComponent),
+        typeof(MouseHover),
+        typeof(MouseLeftClick),
+        typeof(MouseOverEntity),
+        typeof(MouseRightClick),
+        typeof(NavigateCommandComponent),
         typeof(SelectionBoxComponent)
     };
 }
