@@ -9,22 +9,30 @@ public class EntitasGameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        //set up auto-id generation:
-        Contexts.sharedInstance.game.OnEntityCreated += AddId;
-
-        //create entities for entire grid with hexes:
-        HexGridBehaviour _grid = GameObject.FindObjectOfType<HexGridBehaviour>();
-        FindEntitiesInUnity(Contexts.sharedInstance.game, _grid);
-
-        //now init system:
+        //first init system (important, because I want systems to exist before any entities are created):
         _systems = new RootSystem(Contexts.sharedInstance);
         _systems.Initialize();
+
+        //create entities for entire grid with hexes:
+        HexGridBehaviour grid = GameObject.FindObjectOfType<HexGridBehaviour>();
+        TurnGridToEntities(Contexts.sharedInstance.game, grid);
+
+        //create entities for any other scene object:
+        FindEntitiesInUnity(Contexts.sharedInstance.game, grid);
 	}
 
-    //this method gets called whenever a game entity has been created
-    private void AddId(IContext context, IEntity entity)
+    private void TurnGridToEntities(GameContext game, HexGridBehaviour grid)
     {
-        (entity as IID).AddID(entity.creationIndex);
+        for(var c=grid.AllCells(); c.MoveNext();)
+        {
+            HexCellBehaviour cell = c.Current;
+            GameEntity ge = game.CreateEntity();
+
+            Vector3 world = cell.transform.position;
+            Vector3 cube = cell.cubeCoordinates;
+            ge.AddHexCell(world.x, world.y, world.z, cube.x, cube.y, cube.z);
+            ge.AddGameObject(cell.gameObject);
+        }
     }
 
     private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid)

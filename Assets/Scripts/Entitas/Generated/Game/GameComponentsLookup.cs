@@ -10,20 +10,22 @@ public static class GameComponentsLookup {
 
     public const int DebugMessage = 0;
     public const int GameObject = 1;
-    public const int HexGrid = 2;
-    public const int ID = 3;
-    public const int Location = 4;
-    public const int Move = 5;
-    public const int Selectable = 6;
-    public const int Selected = 7;
-    public const int StartPosition = 8;
-    public const int Unit = 9;
+    public const int HexCell = 2;
+    public const int HexGrid = 3;
+    public const int ID = 4;
+    public const int Location = 5;
+    public const int Move = 6;
+    public const int Selectable = 7;
+    public const int Selected = 8;
+    public const int StartPosition = 9;
+    public const int Unit = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "DebugMessage",
         "GameObject",
+        "HexCell",
         "HexGrid",
         "ID",
         "Location",
@@ -37,6 +39,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(DebugMessageComponent),
         typeof(GameObjectComponent),
+        typeof(HexCellComponent),
         typeof(HexGridComponent),
         typeof(IDComponent),
         typeof(LocationComponent),

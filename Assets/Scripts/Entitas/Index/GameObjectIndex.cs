@@ -42,6 +42,34 @@ namespace Index
             }
         }
 
+        public bool ContainsGameObject(GameObject go)
+        {
+            return lookup.ContainsKey(go);
+        }
+
+        public bool ContainsEntity(GameEntity ge)
+        {
+            return lookup.ContainsValue(ge);
+        }
+
+        public IEnumerable<GameObject> AllGameObjects()
+        {
+            return lookup.Keys;
+        }
+
+        public IEnumerable<GameEntity> AllEntities()
+        {
+            return lookup.Values;
+        }
+
+        public int Count
+        {
+            get
+            {
+                return lookup.Count;
+            }
+        }
+
         protected virtual void AddEntity(IGroup collection, GameEntity entity, int index, IComponent component)
         {
             var nameComponent = component as GameObjectComponent;

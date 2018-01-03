@@ -16,6 +16,14 @@ public class HexGridBehaviour : MonoBehaviour
     private const float SQRT3 = 1.7320508075688772935274463415058723669428052538103806280f;
     private const float NEARZERO = 0.0001f;
 
+    public IEnumerator<HexCellBehaviour> AllCells()
+    {
+        for (int i=0; i<_grid.Length; ++i)
+        {
+            if (_grid[i] != null) yield return _grid[i];
+        }
+    }
+
     private Dictionary<HexPassable, Vector3> cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>
     {
         {HexPassable.N, new Vector3(0, 1, -1)},

@@ -25,22 +25,22 @@ namespace Systems.Input
 
         void IExecuteSystem.Execute()
         {
-            InputEntity m = _input.CreateEntity();
-
-            //did we click, or just hover?
-            if (UnityEngine.Input.GetMouseButtonDown(0)) m.isMouseLeftClick = true;
-            else if (UnityEngine.Input.GetMouseButtonDown(1)) m.isMouseRightClick = true;
-            else m.isMouseHover = true;
 
             //now find out what the mouse is pointing at:
             Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
             RaycastHit hitinfo;
             if (Physics.Raycast(ray, out hitinfo))
             {
+                InputEntity m = _input.CreateEntity();
 
-                GameEntity e = _gameObjectIndex[hitinfo.collider.gameObject];
-                if (e != null)
+                //did we click, or just hover?
+                if (UnityEngine.Input.GetMouseButtonDown(0)) m.isMouseLeftClick = true;
+                else if (UnityEngine.Input.GetMouseButtonDown(1)) m.isMouseRightClick = true;
+                else m.isMouseHover = true;
+                
+                if (_gameObjectIndex.ContainsGameObject(hitinfo.collider.gameObject))
                 {
+                    GameEntity e = _gameObjectIndex[hitinfo.collider.gameObject];
                     m.AddMouseOverEntity(e.iD.value);
                 }
                 else
@@ -49,7 +49,18 @@ namespace Systems.Input
 
                     if (cell != null)
                     {
-                        m.AddMouseOverEntity(_gameObjectIndex[cell.gameObject].iD.value);
+                        if (_gameObjectIndex.ContainsGameObject(cell.gameObject))
+                        {
+                            m.AddMouseOverEntity(_gameObjectIndex[cell.gameObject].iD.value);
+                        }
+                        else
+                        {
+                            Debug.LogError("could not find cell in index: " + cell.name + ", index size = " + _gameObjectIndex.Count);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("mouse hovering over unknown object " + hitinfo.collider.name);
                     }
                 }
             }
@@ -57,10 +68,10 @@ namespace Systems.Input
 
         void ICleanupSystem.Cleanup()
         {
-            foreach (var e in _mouseInputs.GetEntities())
-            {
-                e.Destroy();
-            }
+            //foreach (var e in _mouseInputs.GetEntities())
+            //{
+            //    e.Destroy();
+            //}
         }
 
     }
