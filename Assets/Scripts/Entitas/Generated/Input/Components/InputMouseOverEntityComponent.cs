@@ -11,14 +11,14 @@ public partial class InputEntity {
     public MouseOverEntity mouseOverEntity { get { return (MouseOverEntity)GetComponent(InputComponentsLookup.MouseOverEntity); } }
     public bool hasMouseOverEntity { get { return HasComponent(InputComponentsLookup.MouseOverEntity); } }
 
-    public void AddMouseOverEntity(float newValue) {
+    public void AddMouseOverEntity(int newValue) {
         var index = InputComponentsLookup.MouseOverEntity;
         var component = CreateComponent<MouseOverEntity>(index);
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceMouseOverEntity(float newValue) {
+    public void ReplaceMouseOverEntity(int newValue) {
         var index = InputComponentsLookup.MouseOverEntity;
         var component = CreateComponent<MouseOverEntity>(index);
         component.value = newValue;

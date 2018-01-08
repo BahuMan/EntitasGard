@@ -1,9 +1,8 @@
-﻿using Entitas;
+﻿using UnityEngine;
 
-[Input]
-public class MouseOverEntity: IComponent
+public class EntitasLink: MonoBehaviour
 {
     //this field will contain the same id as stored in IDComponent.value
     //and it should have the same type.
-    public int value;
+    public int id;
 }

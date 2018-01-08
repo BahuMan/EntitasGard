@@ -1,6 +1,4 @@
-﻿using System;
-using Entitas;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EntitasGameController : MonoBehaviour {
 
@@ -32,6 +30,11 @@ public class EntitasGameController : MonoBehaviour {
             Vector3 cube = cell.cubeCoordinates;
             ge.AddHexCell(world.x, world.y, world.z, cube.x, cube.y, cube.z);
             ge.AddGameObject(cell.gameObject);
+
+            //now that the entity has been created with a unique ID,
+            //put this ID on the unity GameObject for easy reference:
+            EntitasLink el = cell.gameObject.AddComponent<EntitasLink>();
+            el.id = ge.iD.value;
         }
     }
 
@@ -40,15 +43,20 @@ public class EntitasGameController : MonoBehaviour {
         EntitasInit[] toEntitas = GameObject.FindObjectsOfType<EntitasInit>();
         foreach (var u in toEntitas)
         {
-            GameEntity e = game.CreateEntity();
-            e.AddGameObject(u.gameObject);
+            GameEntity ge = game.CreateEntity();
+            ge.AddGameObject(u.gameObject);
             HexCellBehaviour cell = grid.GetCell(grid.axial_to_cube(grid.pixel_to_axial(u.transform.position)));
             if (cell != null)
             {
-                e.AddLocation(cell);
+                ge.AddLocation(cell);
             }
-            e.isSelectable = true;
-            e.isUnit = true;
+            ge.isSelectable = true;
+            ge.isUnit = true;
+
+            //now that the entity has been created with a unique ID,
+            //put this ID on the unity GameObject for easy reference:
+            EntitasLink el = u.gameObject.AddComponent<EntitasLink>();
+            el.id = ge.iD.value;
         }
     }
 
