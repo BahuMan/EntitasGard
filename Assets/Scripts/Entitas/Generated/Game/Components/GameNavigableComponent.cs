@@ -8,25 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly NavigableComponent navigableComponent = new NavigableComponent();
+    public NavigableComponent navigable { get { return (NavigableComponent)GetComponent(GameComponentsLookup.Navigable); } }
+    public bool hasNavigable { get { return HasComponent(GameComponentsLookup.Navigable); } }
 
-    public bool isNavigable {
-        get { return HasComponent(GameComponentsLookup.Navigable); }
-        set {
-            if (value != isNavigable) {
-                var index = GameComponentsLookup.Navigable;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : navigableComponent;
+    public void AddNavigable(float newTurnRate, float newMoveRate) {
+        var index = GameComponentsLookup.Navigable;
+        var component = CreateComponent<NavigableComponent>(index);
+        component.turnRate = newTurnRate;
+        component.moveRate = newMoveRate;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceNavigable(float newTurnRate, float newMoveRate) {
+        var index = GameComponentsLookup.Navigable;
+        var component = CreateComponent<NavigableComponent>(index);
+        component.turnRate = newTurnRate;
+        component.moveRate = newMoveRate;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveNavigable() {
+        RemoveComponent(GameComponentsLookup.Navigable);
     }
 }
 

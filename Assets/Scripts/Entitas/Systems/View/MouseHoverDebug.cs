@@ -6,12 +6,10 @@ namespace Systems.View
     public class MouseHoverDebug : ReactiveSystem<InputEntity>
     {
 
-        InputContext _input;
         GameContext _game;
 
         public MouseHoverDebug(Contexts contexts) : base(contexts.input)
         {
-            _input = contexts.input;
             _game = contexts.game;
         }
 

@@ -6,14 +6,12 @@ namespace Systems.Command
     public class NavigationCommand : ReactiveSystem<InputEntity>
     {
 
-        private InputContext _input;
         private GameContext _game;
 
         private IGroup<GameEntity> _selectedNavigableUnits;
 
         public NavigationCommand(Contexts contexts): base(contexts.input)
         {
-            _input = contexts.input;
             _game = contexts.game;
             _selectedNavigableUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Navigable, GameMatcher.Selected));
         }

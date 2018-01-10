@@ -18,7 +18,7 @@ namespace Systems.View
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Selected.AddedOrRemoved(), GameMatcher.NavigationTarget.AddedOrRemoved());
+            return context.CreateCollector(GameMatcher.Selected.AddedOrRemoved(), GameMatcher.NavigationPath.AddedOrRemoved());
         }
 
         protected override bool Filter(GameEntity entity)
@@ -39,14 +39,9 @@ namespace Systems.View
 
             foreach (var unit in entities)
             {
-                if (unit.isSelected && unit.hasNavigationTarget)
+                if (unit.isSelected && unit.hasNavigationPath)
                 {
-                    HexCellBehaviour fromCell = unit.location.cell;
-
-                    GameEntity toCellEntity = _game.GetEntityWithID(unit.navigationTarget.targetCellID);
-                    HexCellBehaviour toCell = toCellEntity.gameObject.value.GetComponent<HexCellBehaviour>();
-
-                    Stack<HexCellBehaviour> p = _grid.FindPath(fromCell, toCell);
+                    Stack<HexCellBehaviour> p = unit.navigationPath.path;
                     _grid.LightPath(p, true);
                 }
             }

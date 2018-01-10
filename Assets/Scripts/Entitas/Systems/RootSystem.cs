@@ -12,6 +12,7 @@ public class RootSystem : Feature
         Add(new Systems.Selection.ClickSelect(contexts));
 
         Add(new Systems.Command.NavigationCommand(contexts));
+        Add(new Systems.Command.CreateNavigationPath(contexts));
 
         Add(new Systems.View.ShowEnRoute(contexts));
         Add(new Systems.View.ShowSelectionBox(contexts));

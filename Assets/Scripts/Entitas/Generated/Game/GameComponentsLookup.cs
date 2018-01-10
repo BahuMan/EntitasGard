@@ -16,14 +16,16 @@ public static class GameComponentsLookup {
     public const int Location = 5;
     public const int Move = 6;
     public const int Navigable = 7;
-    public const int NavigationTarget = 8;
-    public const int Selectable = 9;
-    public const int Selected = 10;
-    public const int StartPosition = 11;
-    public const int TimeLine = 12;
-    public const int Unit = 13;
+    public const int NavigationPath = 8;
+    public const int NavigationTarget = 9;
+    public const int Selectable = 10;
+    public const int Selected = 11;
+    public const int StartPosition = 12;
+    public const int TimeLine = 13;
+    public const int Unit = 14;
+    public const int WorldCoordinates = 15;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "DebugMessage",
@@ -34,12 +36,14 @@ public static class GameComponentsLookup {
         "Location",
         "Move",
         "Navigable",
+        "NavigationPath",
         "NavigationTarget",
         "Selectable",
         "Selected",
         "StartPosition",
         "TimeLine",
-        "Unit"
+        "Unit",
+        "WorldCoordinates"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -51,11 +55,13 @@ public static class GameComponentsLookup {
         typeof(LocationComponent),
         typeof(MoveComponent),
         typeof(NavigableComponent),
+        typeof(NavigationPathComponent),
         typeof(NavigationTargetComponent),
         typeof(SelectableComponent),
         typeof(SelectedComponent),
         typeof(StartPositionComponent),
         typeof(TimeLineComponent),
-        typeof(UnitComponent)
+        typeof(UnitComponent),
+        typeof(WorldCoordinatesComponent)
     };
 }

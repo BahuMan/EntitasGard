@@ -61,7 +61,7 @@ public class EntitasGameController : MonoBehaviour {
             if ("Unit".Equals(u.name))
             {
                 ge.isUnit = true;
-                ge.isNavigable = true;
+                ge.AddNavigable(90f, .5f);
             }
 
 
