@@ -32,8 +32,10 @@ public class EntitasGameController : MonoBehaviour {
 
             Vector3 world = cell.transform.position;
             Vector3 cube = cell.cubeCoordinates;
+            Quaternion rot = cell.transform.rotation;
             ge.AddHexCell(world.x, world.y, world.z, cube.x, cube.y, cube.z);
             ge.AddGameObject(cell.gameObject);
+            ge.AddWorldCoordinates(world.x, world.y, world.z, rot.x, rot.y, rot.z, rot.w);
 
             //now that the entity has been created with a unique ID,
             //put this ID on the unity GameObject for easy reference:
@@ -51,6 +53,11 @@ public class EntitasGameController : MonoBehaviour {
         {
             GameEntity ge = game.CreateEntity();
             ge.AddGameObject(u.gameObject);
+
+            Vector3 pos = u.transform.position;
+            Quaternion rot = u.transform.rotation;
+            ge.AddWorldCoordinates(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w);
+            
             HexCellBehaviour cell = grid.GetCell(grid.axial_to_cube(grid.pixel_to_axial(u.transform.position)));
             if (cell != null)
             {

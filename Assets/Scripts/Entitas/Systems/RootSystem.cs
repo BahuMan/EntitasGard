@@ -13,12 +13,16 @@ public class RootSystem : Feature
 
         Add(new Systems.Command.NavigationCommand(contexts));
         Add(new Systems.Command.CreateNavigationPath(contexts));
+        Add(new Systems.Command.MoveOneHex.MoveFirstCellOnPath(contexts));
 
         Add(new Systems.View.ShowEnRoute(contexts));
+        Add(new Systems.View.MoveInUnity(contexts));
         Add(new Systems.View.ShowSelectionBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
         //Add(new Systems.View.MouseHoverDebug(contexts));
         Add(new Systems.View.LogDebugMessageSystem(contexts));
+
+        Add(new Systems.Cleanup.MoveCleanup(contexts));
     }
 
     //this method gets called whenever a game entity has been created
