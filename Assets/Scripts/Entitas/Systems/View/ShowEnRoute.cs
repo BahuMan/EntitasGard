@@ -4,39 +4,51 @@ using System.Collections.Generic;
 
 namespace Systems.View
 {
-    public class ShowEnRoute : IExecuteSystem
+    public class ShowEnRoute : ReactiveSystem<GameEntity>
     {
 
-        IGroup<GameEntity> _unitsEnRouteSelected;
         GameContext _game;
         HexGridBehaviour _grid;
 
-        public ShowEnRoute(Contexts contexts)
+        public ShowEnRoute(Contexts contexts): base(contexts.game)
         {
             _game = contexts.game;
-            _unitsEnRouteSelected = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.NavigationCommand));
             _grid = GameObject.FindObjectOfType<HexGridBehaviour>();
         }
 
-        void IExecuteSystem.Execute()
+        protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
+            return context.CreateCollector(GameMatcher.Selected.AddedOrRemoved(), GameMatcher.NavigationCommand.AddedOrRemoved());
+        }
+
+        protected override bool Filter(GameEntity entity)
+        {
+            return true;
+        }
+
+        protected override void Execute(List<GameEntity> entities)
+        {
+
             //first, darken entire grid:
             _grid.LightPath(_grid, false);
 
-            if (_unitsEnRouteSelected.count < 1)
+            if (entities.Count < 1)
             {
                 _game.Log("No units on route selected");
             }
 
-            foreach (var unit in _unitsEnRouteSelected)
+            foreach (var unit in entities)
             {
-                HexCellBehaviour fromCell = unit.location.cell;
+                if (unit.isSelected && unit.hasNavigationCommand)
+                {
+                    HexCellBehaviour fromCell = unit.location.cell;
 
-                GameEntity toCellEntity = _game.GetEntityWithID(unit.navigationCommand.targetCellID);
-                HexCellBehaviour toCell = toCellEntity.gameObject.value.GetComponent<HexCellBehaviour>();
+                    GameEntity toCellEntity = _game.GetEntityWithID(unit.navigationCommand.targetCellID);
+                    HexCellBehaviour toCell = toCellEntity.gameObject.value.GetComponent<HexCellBehaviour>();
 
-                Stack<HexCellBehaviour> p = _grid.FindPath(fromCell, toCell);
-                _grid.LightPath(p, true);
+                    Stack<HexCellBehaviour> p = _grid.FindPath(fromCell, toCell);
+                    _grid.LightPath(p, true);
+                }
             }
         }
     }

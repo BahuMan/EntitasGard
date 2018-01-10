@@ -158,7 +158,7 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
         }
         else
         {
-            Debug.Log("Path not found");
+            Debug.LogError("Path not found");
             return null;
         }
 
