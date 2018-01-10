@@ -18,9 +18,10 @@ public static class GameComponentsLookup {
     public const int Selectable = 7;
     public const int Selected = 8;
     public const int StartPosition = 9;
-    public const int Unit = 10;
+    public const int TimeLine = 10;
+    public const int Unit = 11;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "DebugMessage",
@@ -33,6 +34,7 @@ public static class GameComponentsLookup {
         "Selectable",
         "Selected",
         "StartPosition",
+        "TimeLine",
         "Unit"
     };
 
@@ -47,6 +49,7 @@ public static class GameComponentsLookup {
         typeof(SelectableComponent),
         typeof(SelectedComponent),
         typeof(StartPositionComponent),
+        typeof(TimeLineComponent),
         typeof(UnitComponent)
     };
 }

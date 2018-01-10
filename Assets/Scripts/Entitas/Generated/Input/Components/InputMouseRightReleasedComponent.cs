@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly MouseLeftClick mouseLeftClickComponent = new MouseLeftClick();
+    static readonly MouseRightReleased mouseRightReleasedComponent = new MouseRightReleased();
 
-    public bool isMouseLeftClick {
-        get { return HasComponent(InputComponentsLookup.MouseLeftClick); }
+    public bool isMouseRightReleased {
+        get { return HasComponent(InputComponentsLookup.MouseRightReleased); }
         set {
-            if (value != isMouseLeftClick) {
-                var index = InputComponentsLookup.MouseLeftClick;
+            if (value != isMouseRightReleased) {
+                var index = InputComponentsLookup.MouseRightReleased;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : mouseLeftClickComponent;
+                            : mouseRightReleasedComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class InputEntity {
 //------------------------------------------------------------------------------
 public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<InputEntity> _matcherMouseLeftClick;
+    static Entitas.IMatcher<InputEntity> _matcherMouseRightReleased;
 
-    public static Entitas.IMatcher<InputEntity> MouseLeftClick {
+    public static Entitas.IMatcher<InputEntity> MouseRightReleased {
         get {
-            if (_matcherMouseLeftClick == null) {
-                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.MouseLeftClick);
+            if (_matcherMouseRightReleased == null) {
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.MouseRightReleased);
                 matcher.componentNames = InputComponentsLookup.componentNames;
-                _matcherMouseLeftClick = matcher;
+                _matcherMouseRightReleased = matcher;
             }
 
-            return _matcherMouseLeftClick;
+            return _matcherMouseRightReleased;
         }
     }
 }

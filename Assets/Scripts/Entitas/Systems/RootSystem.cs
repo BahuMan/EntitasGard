@@ -8,10 +8,11 @@ public class RootSystem : Feature
         contexts.game.OnEntityCreated += AddId;
 
         Add(new InitHelloWorld(contexts));
-        Add(new Systems.Input.MouseClickInput(contexts));
-        //Add(new Systems.Input.MouseSelectInput(contexts));
-        //Add(new Systems.Input.MouseMoveInput(contexts));
-        Add(new Systems.View.ShowSelectionBox(contexts));
+        Add(new Systems.Input.MouseInput(contexts));
+        Add(new Systems.Selection.ClickSelect(contexts));
+        //Add(new Systems.View.ShowSelectionBox(contexts));
+        Add(new Systems.View.SelectionView(contexts));
+        Add(new Systems.View.MouseHoverDebug(contexts));
         Add(new Systems.View.LogDebugMessageSystem(contexts));
     }
 

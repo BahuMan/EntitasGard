@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class InputEntity {
 
-    static readonly MouseRightClick mouseRightClickComponent = new MouseRightClick();
+    static readonly MouseLeftDown mouseLeftDownComponent = new MouseLeftDown();
 
-    public bool isMouseRightClick {
-        get { return HasComponent(InputComponentsLookup.MouseRightClick); }
+    public bool isMouseLeftDown {
+        get { return HasComponent(InputComponentsLookup.MouseLeftDown); }
         set {
-            if (value != isMouseRightClick) {
-                var index = InputComponentsLookup.MouseRightClick;
+            if (value != isMouseLeftDown) {
+                var index = InputComponentsLookup.MouseLeftDown;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : mouseRightClickComponent;
+                            : mouseLeftDownComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class InputEntity {
 //------------------------------------------------------------------------------
 public sealed partial class InputMatcher {
 
-    static Entitas.IMatcher<InputEntity> _matcherMouseRightClick;
+    static Entitas.IMatcher<InputEntity> _matcherMouseLeftDown;
 
-    public static Entitas.IMatcher<InputEntity> MouseRightClick {
+    public static Entitas.IMatcher<InputEntity> MouseLeftDown {
         get {
-            if (_matcherMouseRightClick == null) {
-                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.MouseRightClick);
+            if (_matcherMouseLeftDown == null) {
+                var matcher = (Entitas.Matcher<InputEntity>)Entitas.Matcher<InputEntity>.AllOf(InputComponentsLookup.MouseLeftDown);
                 matcher.componentNames = InputComponentsLookup.componentNames;
-                _matcherMouseRightClick = matcher;
+                _matcherMouseLeftDown = matcher;
             }
 
-            return _matcherMouseRightClick;
+            return _matcherMouseLeftDown;
         }
     }
 }
