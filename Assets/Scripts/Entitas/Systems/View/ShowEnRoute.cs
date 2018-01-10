@@ -18,12 +18,12 @@ namespace Systems.View
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Selected.AddedOrRemoved(), GameMatcher.NavigationCommand.AddedOrRemoved());
+            return context.CreateCollector(GameMatcher.Selected.AddedOrRemoved(), GameMatcher.NavigationTarget.AddedOrRemoved());
         }
 
         protected override bool Filter(GameEntity entity)
         {
-            return true;
+            return entity.hasLocation;
         }
 
         protected override void Execute(List<GameEntity> entities)
@@ -39,11 +39,11 @@ namespace Systems.View
 
             foreach (var unit in entities)
             {
-                if (unit.isSelected && unit.hasNavigationCommand)
+                if (unit.isSelected && unit.hasNavigationTarget)
                 {
                     HexCellBehaviour fromCell = unit.location.cell;
 
-                    GameEntity toCellEntity = _game.GetEntityWithID(unit.navigationCommand.targetCellID);
+                    GameEntity toCellEntity = _game.GetEntityWithID(unit.navigationTarget.targetCellID);
                     HexCellBehaviour toCell = toCellEntity.gameObject.value.GetComponent<HexCellBehaviour>();
 
                     Stack<HexCellBehaviour> p = _grid.FindPath(fromCell, toCell);

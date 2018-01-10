@@ -40,7 +40,7 @@ namespace Systems.Command
             }
             foreach (var unit in _selectedNavigableUnits)
             {
-                unit.ReplaceNavigationCommand(dest.iD.value);
+                unit.ReplaceNavigationTarget(dest.iD.value);
             }
         }
     }

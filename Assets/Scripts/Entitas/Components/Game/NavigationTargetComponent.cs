@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 [Game]
-public class NavigationCommandComponent : IComponent
+public class NavigationTargetComponent : IComponent
 {
     public int targetCellID;
 }

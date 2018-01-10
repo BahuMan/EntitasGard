@@ -86,10 +86,10 @@ namespace Systems.Selection
         //click start and end were close together, so we assumed the player clicked on a single object
         private void PerformClickSelect(InputEntity clickStart, InputEntity clickEnd)
         {
+            ClearSelection();
             GameEntity ge = _game.GetEntityWithID(clickEnd.mouseOverEntity.value);
             if (ge.isSelectable)
             {
-                ClearSelection();
                 ge.isSelected = true;
             }
             else

@@ -16,7 +16,7 @@ public static class GameComponentsLookup {
     public const int Location = 5;
     public const int Move = 6;
     public const int Navigable = 7;
-    public const int NavigationCommand = 8;
+    public const int NavigationTarget = 8;
     public const int Selectable = 9;
     public const int Selected = 10;
     public const int StartPosition = 11;
@@ -34,7 +34,7 @@ public static class GameComponentsLookup {
         "Location",
         "Move",
         "Navigable",
-        "NavigationCommand",
+        "NavigationTarget",
         "Selectable",
         "Selected",
         "StartPosition",
@@ -51,7 +51,7 @@ public static class GameComponentsLookup {
         typeof(LocationComponent),
         typeof(MoveComponent),
         typeof(NavigableComponent),
-        typeof(NavigationCommandComponent),
+        typeof(NavigationTargetComponent),
         typeof(SelectableComponent),
         typeof(SelectedComponent),
         typeof(StartPositionComponent),

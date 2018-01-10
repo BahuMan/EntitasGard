@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public NavigationCommandComponent navigationCommand { get { return (NavigationCommandComponent)GetComponent(GameComponentsLookup.NavigationCommand); } }
-    public bool hasNavigationCommand { get { return HasComponent(GameComponentsLookup.NavigationCommand); } }
+    public NavigationTargetComponent navigationTarget { get { return (NavigationTargetComponent)GetComponent(GameComponentsLookup.NavigationTarget); } }
+    public bool hasNavigationTarget { get { return HasComponent(GameComponentsLookup.NavigationTarget); } }
 
-    public void AddNavigationCommand(int newTargetCellID) {
-        var index = GameComponentsLookup.NavigationCommand;
-        var component = CreateComponent<NavigationCommandComponent>(index);
+    public void AddNavigationTarget(int newTargetCellID) {
+        var index = GameComponentsLookup.NavigationTarget;
+        var component = CreateComponent<NavigationTargetComponent>(index);
         component.targetCellID = newTargetCellID;
         AddComponent(index, component);
     }
 
-    public void ReplaceNavigationCommand(int newTargetCellID) {
-        var index = GameComponentsLookup.NavigationCommand;
-        var component = CreateComponent<NavigationCommandComponent>(index);
+    public void ReplaceNavigationTarget(int newTargetCellID) {
+        var index = GameComponentsLookup.NavigationTarget;
+        var component = CreateComponent<NavigationTargetComponent>(index);
         component.targetCellID = newTargetCellID;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveNavigationCommand() {
-        RemoveComponent(GameComponentsLookup.NavigationCommand);
+    public void RemoveNavigationTarget() {
+        RemoveComponent(GameComponentsLookup.NavigationTarget);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherNavigationCommand;
+    static Entitas.IMatcher<GameEntity> _matcherNavigationTarget;
 
-    public static Entitas.IMatcher<GameEntity> NavigationCommand {
+    public static Entitas.IMatcher<GameEntity> NavigationTarget {
         get {
-            if (_matcherNavigationCommand == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NavigationCommand);
+            if (_matcherNavigationTarget == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.NavigationTarget);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherNavigationCommand = matcher;
+                _matcherNavigationTarget = matcher;
             }
 
-            return _matcherNavigationCommand;
+            return _matcherNavigationTarget;
         }
     }
 }
