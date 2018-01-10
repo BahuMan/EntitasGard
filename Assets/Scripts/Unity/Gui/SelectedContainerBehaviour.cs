@@ -39,7 +39,7 @@ public class SelectedContainerBehaviour : MonoBehaviour {
 
         if (forward.ContainsKey(sel))
         {
-            Debug.LogError("Same object selected twice: " + sel.name);
+            //this can happen when a previously selected unit is also in the new selection box
             return;
         }
 
@@ -48,6 +48,7 @@ public class SelectedContainerBehaviour : MonoBehaviour {
         thumb.GetComponent<RectTransform>().SetParent(this.GetComponent<RectTransform>());
         thumb.gameObject.SetActive(true);
         thumb.image = selectable.Thumbnail;
+        thumb.transform.GetChild(0).GetComponent<Text>().text = sel.name;
         thumb.onClick.AddListener(() => { if (UnselectRequested != null) UnselectRequested.Invoke(sel); });
 
         forward[sel] = thumb;

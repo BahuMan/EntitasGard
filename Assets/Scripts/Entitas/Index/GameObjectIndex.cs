@@ -29,7 +29,7 @@ namespace Index
             lookup.Clear();
         }
 
-        public Entity FindEntityForGameObject(GameObject go)
+        public GameEntity FindEntityForGameObject(GameObject go)
         {
             return lookup[go];
         }

@@ -10,9 +10,13 @@ public class RootSystem : Feature
         Add(new InitHelloWorld(contexts));
         Add(new Systems.Input.MouseInput(contexts));
         Add(new Systems.Selection.ClickSelect(contexts));
-        //Add(new Systems.View.ShowSelectionBox(contexts));
+
+        Add(new Systems.Command.NavigationCommand(contexts));
+
+        Add(new Systems.View.ShowEnRoute(contexts));
+        Add(new Systems.View.ShowSelectionBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
-        Add(new Systems.View.MouseHoverDebug(contexts));
+        //Add(new Systems.View.MouseHoverDebug(contexts));
         Add(new Systems.View.LogDebugMessageSystem(contexts));
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 
-public class HexGridBehaviour : MonoBehaviour
+public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
 {
     public int size = 5;
     public float cellsize = 1;
@@ -11,12 +11,22 @@ public class HexGridBehaviour : MonoBehaviour
     public const int HEXMASK = 1 >> 8;
     public float _chanceForPassage = .4f;
 
-    [SerializeField, HideInInspector]
+    [SerializeField]
     private HexCellBehaviour[] _grid;
     private const float SQRT3 = 1.7320508075688772935274463415058723669428052538103806280f;
     private const float NEARZERO = 0.0001f;
 
-    public IEnumerator<HexCellBehaviour> AllCells()
+    public IEnumerator<HexCellBehaviour> GetEnumerator()
+    {
+        return GetCellEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetCellEnumerator();
+    }
+
+    public IEnumerator<HexCellBehaviour> GetCellEnumerator()
     {
         for (int i=0; i<_grid.Length; ++i)
         {
@@ -97,7 +107,7 @@ public class HexGridBehaviour : MonoBehaviour
     }
     */
 
-    private Stack<HexCellBehaviour> FindPath(HexCellBehaviour from, HexCellBehaviour to)
+    public Stack<HexCellBehaviour> FindPath(HexCellBehaviour from, HexCellBehaviour to)
     {
         Stack<HexCellBehaviour> path = new Stack<HexCellBehaviour>();
         Dictionary<HexCellBehaviour, int> cost = new Dictionary<HexCellBehaviour, int>();
@@ -111,7 +121,7 @@ public class HexGridBehaviour : MonoBehaviour
         while (queue.Count > 0 && !found)
         {
             HexCellBehaviour current = queue.Dequeue();
-            Debug.Log("Next node: " + current.cubeCoordinates);
+            //Debug.Log("Next node: " + current.cubeCoordinates);
             if (current == to)
             {
                 found = true;

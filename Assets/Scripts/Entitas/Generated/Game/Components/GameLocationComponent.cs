@@ -11,17 +11,19 @@ public partial class GameEntity {
     public LocationComponent location { get { return (LocationComponent)GetComponent(GameComponentsLookup.Location); } }
     public bool hasLocation { get { return HasComponent(GameComponentsLookup.Location); } }
 
-    public void AddLocation(HexCellBehaviour newCell) {
+    public void AddLocation(HexCellBehaviour newCell, int newCellid) {
         var index = GameComponentsLookup.Location;
         var component = CreateComponent<LocationComponent>(index);
         component.cell = newCell;
+        component.cellid = newCellid;
         AddComponent(index, component);
     }
 
-    public void ReplaceLocation(HexCellBehaviour newCell) {
+    public void ReplaceLocation(HexCellBehaviour newCell, int newCellid) {
         var index = GameComponentsLookup.Location;
         var component = CreateComponent<LocationComponent>(index);
         component.cell = newCell;
+        component.cellid = newCellid;
         ReplaceComponent(index, component);
     }
 

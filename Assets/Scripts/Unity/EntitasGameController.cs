@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Index;
 
 public class EntitasGameController : MonoBehaviour {
 
@@ -13,15 +14,18 @@ public class EntitasGameController : MonoBehaviour {
 
         //create entities for entire grid with hexes:
         HexGridBehaviour grid = GameObject.FindObjectOfType<HexGridBehaviour>();
-        TurnGridToEntities(Contexts.sharedInstance.game, grid);
+        GameObjectIndex goi = TurnGridToEntities(Contexts.sharedInstance.game, grid);
 
         //create entities for any other scene object:
-        FindEntitiesInUnity(Contexts.sharedInstance.game, grid);
+        FindEntitiesInUnity(Contexts.sharedInstance.game, grid, goi);
 	}
 
-    private void TurnGridToEntities(GameContext game, HexGridBehaviour grid)
+    private GameObjectIndex TurnGridToEntities(GameContext game, HexGridBehaviour grid)
     {
-        for(var c=grid.AllCells(); c.MoveNext();)
+
+        GameObjectIndex goi = new GameObjectIndex(game);
+
+        for(var c=grid.GetCellEnumerator(); c.MoveNext();)
         {
             HexCellBehaviour cell = c.Current;
             GameEntity ge = game.CreateEntity();
@@ -36,9 +40,11 @@ public class EntitasGameController : MonoBehaviour {
             EntitasLink el = cell.gameObject.AddComponent<EntitasLink>();
             el.id = ge.iD.value;
         }
+
+        return goi;
     }
 
-    private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid)
+    private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid, GameObjectIndex goi)
     {
         EntitasInit[] toEntitas = GameObject.FindObjectsOfType<EntitasInit>();
         foreach (var u in toEntitas)
@@ -48,10 +54,16 @@ public class EntitasGameController : MonoBehaviour {
             HexCellBehaviour cell = grid.GetCell(grid.axial_to_cube(grid.pixel_to_axial(u.transform.position)));
             if (cell != null)
             {
-                ge.AddLocation(cell);
+                int id = goi.FindEntityForGameObject(cell.gameObject).iD.value;
+                ge.AddLocation(cell, id);
             }
             ge.isSelectable = true;
-            ge.isUnit = true;
+            if ("Unit".Equals(u.name))
+            {
+                ge.isUnit = true;
+                ge.isNavigable = true;
+            }
+
 
             //now that the entity has been created with a unique ID,
             //put this ID on the unity GameObject for easy reference:

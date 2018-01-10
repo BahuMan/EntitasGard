@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Systems.View
 {

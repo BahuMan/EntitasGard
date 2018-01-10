@@ -15,13 +15,15 @@ public static class GameComponentsLookup {
     public const int ID = 4;
     public const int Location = 5;
     public const int Move = 6;
-    public const int Selectable = 7;
-    public const int Selected = 8;
-    public const int StartPosition = 9;
-    public const int TimeLine = 10;
-    public const int Unit = 11;
+    public const int Navigable = 7;
+    public const int NavigationCommand = 8;
+    public const int Selectable = 9;
+    public const int Selected = 10;
+    public const int StartPosition = 11;
+    public const int TimeLine = 12;
+    public const int Unit = 13;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "DebugMessage",
@@ -31,6 +33,8 @@ public static class GameComponentsLookup {
         "ID",
         "Location",
         "Move",
+        "Navigable",
+        "NavigationCommand",
         "Selectable",
         "Selected",
         "StartPosition",
@@ -46,6 +50,8 @@ public static class GameComponentsLookup {
         typeof(IDComponent),
         typeof(LocationComponent),
         typeof(MoveComponent),
+        typeof(NavigableComponent),
+        typeof(NavigationCommandComponent),
         typeof(SelectableComponent),
         typeof(SelectedComponent),
         typeof(StartPositionComponent),

@@ -49,11 +49,11 @@ namespace Systems.Input
 
             if (UnityEngine.Input.GetMouseButtonDown(1))
             {
-                RemoveAll(_rightClicks); //previous left click is no longer valid
+                RemoveAll(_rightClicks); //previous right click is no longer valid
                 m.isMouseRightDown = true;
                 m.isMouseHover = false;
             }
-            else if (UnityEngine.Input.GetMouseButtonDown(1))
+            else if (UnityEngine.Input.GetMouseButtonUp(1))
             {
                 m.isMouseRightReleased = true;
                 m.isMouseHover = false;

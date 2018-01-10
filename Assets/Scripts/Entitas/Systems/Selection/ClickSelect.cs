@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 using System;
+using UnityEngine;
 
 namespace Systems.Selection
 {
     public class ClickSelect : ReactiveSystem<InputEntity>
     {
 
-        private const float _maxClickTime = .5f; //time between button down and button up
-        private const float _maxClickDistance = 10; //nr of pixels between button up and button down
+        public const float MAX_CLICK_TIME = .2f; //time between button down and button up
+        public const float MAX_CLICK_DISTANCE = 5; //nr of pixels between button up and button down
 
         IGroup<InputEntity> _leftClicks;
         IGroup<GameEntity> _selected;
+        IGroup<GameEntity> _selectable;
         InputContext _input;
         GameContext _game;
 
@@ -21,6 +23,7 @@ namespace Systems.Selection
             _game = contexts.game;
             _leftClicks = _input.GetGroup(InputMatcher.MouseLeftDown);
             _selected = _game.GetGroup(GameMatcher.Selected);
+            _selectable = _game.GetGroup(GameMatcher.Selectable);
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
@@ -44,21 +47,55 @@ namespace Systems.Selection
             float clickPixelsWidth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);
             float clickPixelsHeighth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);
 
-            if (clickTime < _maxClickTime 
-                || (clickPixelsHeighth < _maxClickDistance && clickPixelsWidth < _maxClickDistance))
+            if (clickTime < MAX_CLICK_TIME 
+                || (clickPixelsHeighth < MAX_CLICK_DISTANCE && clickPixelsWidth < MAX_CLICK_DISTANCE))
             {
-                GameEntity ge = _game.GetEntityWithID(clickEnd.mouseOverEntity.value);
-                if (ge.isSelectable)
-                {
-                    ClearSelection();
-                    ge.isSelected = true;
-                }
-                else
-                {
-                    _game.Log("Mouse clicked on non-selectable entity " + ge.iD);
-                }
+                PerformClickSelect(clickStart, clickEnd);
+            }
+            else
+            {
+                PerformBoxSelect(clickStart, clickEnd);
             }
 
+        }
+
+        //click start and end were far apart, we assume the player dragged a box
+        private void PerformBoxSelect(InputEntity clickStart, InputEntity clickEnd)
+        {
+            float boxx = Math.Min(clickStart.screenCoordinates.x, clickEnd.screenCoordinates.x);
+            float boxy = Math.Min(clickStart.screenCoordinates.y, clickEnd.screenCoordinates.y);
+            float width = Math.Abs(clickStart.screenCoordinates.x - clickEnd.screenCoordinates.x);
+            float height = Math.Abs(clickStart.screenCoordinates.y - clickEnd.screenCoordinates.y);
+
+            ClearSelection();
+
+            foreach (var unit in _selectable)
+            {
+
+                Vector3 scr = Camera.main.WorldToScreenPoint(unit.gameObject.value.transform.position);
+                if (scr.x > boxx
+                    && scr.x < (boxx+width)
+                    && scr.y > boxy
+                    && scr.y < (boxy+height))
+                {
+                    unit.isSelected = true;
+                }
+            }
+        }
+
+        //click start and end were close together, so we assumed the player clicked on a single object
+        private void PerformClickSelect(InputEntity clickStart, InputEntity clickEnd)
+        {
+            GameEntity ge = _game.GetEntityWithID(clickEnd.mouseOverEntity.value);
+            if (ge.isSelectable)
+            {
+                ClearSelection();
+                ge.isSelected = true;
+            }
+            else
+            {
+                _game.Log("Mouse clicked on non-selectable entity " + ge.iD);
+            }
         }
 
         private void ClearSelection()
