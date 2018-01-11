@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using UnityEngine;
 
 namespace Systems.View
 {
@@ -24,8 +25,13 @@ namespace Systems.View
         {
             foreach (var e in entities)
             {
-                e.gameObject.value.transform.Translate(e.move.dx, 0, e.move.dz);
-                e.gameObject.value.transform.Rotate(0, e.move.ry, 0);
+                Transform t = e.gameObject.value.transform;
+
+                t.position += new Vector3(e.move.dx, 0, e.move.dz);
+                t.rotation *= Quaternion.Euler(0, e.move.ry, 0);
+
+                e.ReplaceWorldCoordinates(t.position.x, t.position.y, t.position.z,
+                                            t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w);
             }
         }
     }

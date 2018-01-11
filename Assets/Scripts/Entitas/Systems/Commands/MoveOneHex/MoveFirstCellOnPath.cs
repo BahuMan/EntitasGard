@@ -8,13 +8,11 @@ namespace Systems.Command.MoveOneHex
     {
 
         public float CLOSE_ENOUGH = 0.001f;
-        GameContext _game;
         IGroup<GameEntity> _navigatingUnits;
 
         public MoveFirstCellOnPath(Contexts contexts)
         {
-            _game = contexts.game;
-            _navigatingUnits = _game.GetGroup(GameMatcher.AllOf(
+            _navigatingUnits = contexts.game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.WorldCoordinates,
                 GameMatcher.Location,
                 GameMatcher.NavigationPath,
@@ -44,7 +42,6 @@ namespace Systems.Command.MoveOneHex
                     path.Pop();
                     if (path.Count > 0) unit.ReplaceNavigationPath(path);
                     else unit.RemoveNavigationTarget();
-                    _game.Log("ARRIVED");
                     break;
                 }
 
@@ -57,21 +54,19 @@ namespace Systems.Command.MoveOneHex
                 }
 
 
-                Vector3 dir = unit.navigable.moveRate * Time.deltaTime * CalcVector3(unit.worldCoordinates, path.Peek());
+                Vector3 dir = CalcVector3(unit.worldCoordinates, path.Peek());
                 float roty = CalcRotationY(unit.worldCoordinates, dir, unit.navigable.turnRate);
+                dir *= unit.navigable.moveRate * Time.deltaTime;
 
                 if (Mathf.Abs(roty) < CLOSE_ENOUGH)
                 {
                     //2.we're pointed at next cell but still in our own
                     unit.ReplaceMove(dir.x, dir.z, roty);
-                    _game.Log("moving");
                     break;
                 }
 
                 //1. not oriented towards destination cell; unit should only rotate and not move
                 unit.ReplaceMove(0, 0, roty);
-                _game.Log("rotating");
-
             }
         }
 
@@ -79,7 +74,8 @@ namespace Systems.Command.MoveOneHex
         {
             Quaternion from = new Quaternion(worldCoordinates.rx, worldCoordinates.ry, worldCoordinates.rz, worldCoordinates.rw);
             Quaternion to = Quaternion.LookRotation(dir, Vector3.up);
-            return Quaternion.RotateTowards(from, to, rotationSpeed * Time.deltaTime).eulerAngles.y;
+            Quaternion res = Quaternion.RotateTowards(from, to, rotationSpeed * Time.deltaTime);
+            return Mathf.DeltaAngle(from.eulerAngles.y, res.eulerAngles.y);
         }
 
         private float CalcSqrDistance(WorldCoordinatesComponent coord, HexCellBehaviour to)
@@ -89,11 +85,13 @@ namespace Systems.Command.MoveOneHex
 
         private Vector3 CalcVector3(WorldCoordinatesComponent coord, HexCellBehaviour to)
         {
-            return new Vector3(
+            Vector3 res = new Vector3(
                 to.transform.position.x - coord.x,
                 to.transform.position.y - coord.y,
                 to.transform.position.z - coord.z
                 ).normalized;
+
+            return res;
         }
     }
 }
