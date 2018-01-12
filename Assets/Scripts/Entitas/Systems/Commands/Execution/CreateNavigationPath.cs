@@ -2,7 +2,7 @@
 using UnityEngine;
 using Entitas;
 
-namespace Systems.Command
+namespace Systems.Command.Execution
 {
     public class CreateNavigationPath : ReactiveSystem<GameEntity>
     {

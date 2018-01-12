@@ -46,6 +46,11 @@ namespace Systems.Input
                 m.isMouseLeftReleased = true;
                 m.isMouseHover = false;
             }
+            else if (_leftClicks.count > 0 && !UnityEngine.Input.GetMouseButton(0))
+            {
+                //we seem to have missed the button "up" event; happens e.g. during debug
+                RemoveAll(_leftClicks);
+            }
 
             if (UnityEngine.Input.GetMouseButtonDown(1))
             {
@@ -57,6 +62,11 @@ namespace Systems.Input
             {
                 m.isMouseRightReleased = true;
                 m.isMouseHover = false;
+            }
+            else if (_rightClicks.count > 0 && !UnityEngine.Input.GetMouseButton(1))
+            {
+                //we seem to have missed the button "up" event; happens e.g. during debug
+                RemoveAll(_rightClicks);
             }
 
 

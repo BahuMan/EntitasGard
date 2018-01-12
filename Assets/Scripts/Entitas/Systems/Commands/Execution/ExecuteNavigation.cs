@@ -2,15 +2,15 @@
 using Entitas;
 using UnityEngine;
 
-namespace Systems.Command.MoveOneHex
+namespace Systems.Command.Execution
 {
-    public class MoveFirstCellOnPath : IExecuteSystem
+    public class ExecuteNavigation : IExecuteSystem
     {
 
         public float CLOSE_ENOUGH = 0.001f;
         IGroup<GameEntity> _navigatingUnits;
 
-        public MoveFirstCellOnPath(Contexts contexts)
+        public ExecuteNavigation(Contexts contexts)
         {
             _navigatingUnits = contexts.game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.WorldCoordinates,

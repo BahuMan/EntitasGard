@@ -8,7 +8,6 @@ namespace Systems.Selection
     public class ClickSelect : ReactiveSystem<InputEntity>
     {
 
-        public const float MAX_CLICK_TIME = .2f; //time between button down and button up
         public const float MAX_CLICK_DISTANCE = 5; //nr of pixels between button up and button down
 
         IGroup<InputEntity> _leftClicks;
@@ -43,12 +42,10 @@ namespace Systems.Selection
             var clickStart = cs.Current; //there should be exactly one clickStart entity
             var clickEnd = entities[0];  //there should be exactly one clickEnd entity
 
-            float clickTime = clickEnd.timeLine.value - clickStart.timeLine.value;
             float clickPixelsWidth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);
             float clickPixelsHeighth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);
 
-            if (clickTime < MAX_CLICK_TIME 
-                || (clickPixelsHeighth < MAX_CLICK_DISTANCE && clickPixelsWidth < MAX_CLICK_DISTANCE))
+            if (clickPixelsHeighth < MAX_CLICK_DISTANCE && clickPixelsWidth < MAX_CLICK_DISTANCE)
             {
                 PerformClickSelect(clickStart, clickEnd);
             }

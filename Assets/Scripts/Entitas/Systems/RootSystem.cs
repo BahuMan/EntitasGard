@@ -11,12 +11,18 @@ public class RootSystem : Feature
         Add(new Systems.Input.MouseInput(contexts));
         Add(new Systems.Selection.ClickSelect(contexts));
 
+        Add(new Systems.Command.AttackCommand(contexts));
+        Add(new Systems.Command.Execution.AimGun(contexts));
+        Add(new Systems.Command.Execution.AttackExecute(contexts));
+
         Add(new Systems.Command.NavigationCommand(contexts));
-        Add(new Systems.Command.CreateNavigationPath(contexts));
-        Add(new Systems.Command.MoveOneHex.MoveFirstCellOnPath(contexts));
+        Add(new Systems.Command.Execution.CreateNavigationPath(contexts));
+        Add(new Systems.Command.Execution.ExecuteNavigation(contexts));
 
         Add(new Systems.View.ShowEnRoute(contexts));
         Add(new Systems.View.MoveInUnity(contexts));
+        Add(new Systems.View.Attack.RotateTurretInUnity(contexts)); //must come after MoveInUnity
+        Add(new Systems.View.Attack.FireWeaponInUnity(contexts));
         Add(new Systems.View.ShowSelectionBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
         //Add(new Systems.View.MouseHoverDebug(contexts));

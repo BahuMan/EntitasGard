@@ -1,6 +1,7 @@
 ﻿using Entitas;
 
 [Game]
+[System.Serializable]
 public class NavigableComponent : IComponent
 {
     public float turnRate; //degrees per second
