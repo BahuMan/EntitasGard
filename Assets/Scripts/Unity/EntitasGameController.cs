@@ -14,17 +14,14 @@ public class EntitasGameController : MonoBehaviour {
 
         //create entities for entire grid with hexes:
         HexGridBehaviour grid = GameObject.FindObjectOfType<HexGridBehaviour>();
-        GameObjectIndex goi = TurnGridToEntities(Contexts.sharedInstance.game, grid);
+        TurnGridToEntities(Contexts.sharedInstance.game, grid);
 
         //create entities for any other scene object:
-        FindEntitiesInUnity(Contexts.sharedInstance.game, grid, goi);
+        FindEntitiesInUnity(Contexts.sharedInstance.game, grid);
 	}
 
-    private GameObjectIndex TurnGridToEntities(GameContext game, HexGridBehaviour grid)
+    private void TurnGridToEntities(GameContext game, HexGridBehaviour grid)
     {
-
-        GameObjectIndex goi = new GameObjectIndex(game);
-
         for(var c=grid.GetCellEnumerator(); c.MoveNext();)
         {
             HexCellBehaviour cell = c.Current;
@@ -42,47 +39,15 @@ public class EntitasGameController : MonoBehaviour {
             EntitasLink el = cell.gameObject.AddComponent<EntitasLink>();
             el.id = ge.iD.value;
         }
-
-        return goi;
     }
 
-    private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid, GameObjectIndex goi)
+    private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid)
     {
+        Presets preset = new Presets(game, grid);
         EntitasInit[] toEntitas = GameObject.FindObjectsOfType<EntitasInit>();
         foreach (var u in toEntitas)
         {
-            GameEntity ge = game.CreateEntity();
-            ge.AddGameObject(u.gameObject);
-
-            Vector3 pos = u.transform.position;
-            Quaternion rot = u.transform.rotation;
-            ge.AddWorldCoordinates(pos.x, pos.y, pos.z, rot.x, rot.y, rot.z, rot.w);
-            
-            HexCellBehaviour cell = grid.GetCell(grid.axial_to_cube(grid.pixel_to_axial(u.transform.position)));
-            if (cell != null)
-            {
-                int id = goi.FindEntityForGameObject(cell.gameObject).iD.value;
-                ge.AddLocation(cell, id);
-            }
-            ge.isSelectable = true;
-            if ("Unit".Equals(u.name))
-            {
-                ge.isUnit = true;
-                ge.AddNavigable(90f, .5f);
-                ge.AddHealth(50);
-                ge.AddWeaponRotation(0);
-                ge.AddWeapon(2, 45, 2f, 1f); //turret has half turnrate of vehicle to illustrate correction
-            }
-            else
-            {
-                ge.AddHealth(500);
-            }
-
-
-            //now that the entity has been created with a unique ID,
-            //put this ID on the unity GameObject for easy reference:
-            EntitasLink el = u.gameObject.AddComponent<EntitasLink>();
-            el.id = ge.iD.value;
+            preset.CreateBlueprint(u);
         }
     }
 
