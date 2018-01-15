@@ -44,69 +44,6 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
         {HexPassable.NW, new Vector3(-1, 1, 0) }
     };
 
-    //private HexCellBehaviour from, to;
-    //private List<HexCellBehaviour> path = new List<HexCellBehaviour>();
-    
-    /* all of this code is now done in the editor/inspector, not at runtime:
-    private void Start()
-    {
-        cubeNeighboursCoordinates = new Dictionary<HexPassable, Vector3>(10);
-        cubeNeighboursCoordinates[HexPassable.N] = new Vector3(0, 1, -1);
-        cubeNeighboursCoordinates[HexPassable.NE] = new Vector3(1, 0, -1);
-        cubeNeighboursCoordinates[HexPassable.SE] = new Vector3(1, -1, 0);
-        cubeNeighboursCoordinates[HexPassable.S] = new Vector3(0, -1, 1);
-        cubeNeighboursCoordinates[HexPassable.SW] = new Vector3(-1, 0, 1);
-        cubeNeighboursCoordinates[HexPassable.NW] = new Vector3(-1, 1, 0);
-
-        CreateGrid();
-        CreateMaze();
-    }
-    */
-
-    /* listening to mouse and keyboard will be handles in Entitas systems:
-    private void Update()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo = new RaycastHit();
-
-        if (Input.GetMouseButtonDown(0)) {
-            if (from != null) from.SetHighLight(false);
-            foreach (var cell in path) cell.SetHighLight(false);
-
-            if (Physics.Raycast(ray, out hitInfo, 1 << 8))
-            {
-                Vector3 c = axial_to_cube(pixel_to_hex(hitInfo.point));
-                from = GetCell(c);
-                if (from != null)
-                {
-                    from.SetHighLight(true);
-                }
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (to != null) to.SetHighLight(false);
-            foreach (var cell in path) cell.SetHighLight(false);
-
-            if (Physics.Raycast(ray, out hitInfo, 1 << 8))
-            {
-                Vector3 c = axial_to_cube(pixel_to_hex(hitInfo.point));
-                to = GetCell(c);
-                if (to != null)
-                {
-                    to.SetHighLight(true);
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(FindPath(from, to));
-        }
-    }
-    */
-
     public Stack<HexCellBehaviour> FindPath(HexCellBehaviour from, HexCellBehaviour to)
     {
         Stack<HexCellBehaviour> path = new Stack<HexCellBehaviour>();
@@ -139,8 +76,8 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
                 if (!cost.ContainsKey(neighbour) || cost[neighbour] > (cost[current] + 1))
                 {
                     unvisitedNeighbours.Add(neighbour);
-                    cost[neighbour] = cost[current] + 1;
-                    queue.Enqueue(cost[current] + 1 + DistanceBetween(neighbour, to), neighbour);
+                    cost[neighbour] = cost[current] + current.traverseCost;
+                    queue.Enqueue(cost[neighbour] + DistanceBetween(neighbour, to), neighbour);
                     parent[neighbour] = current;
                 }
             }
@@ -179,61 +116,6 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
             cell.SetHighLight(lit);
         }
         from.SetHighLight(lit);
-    }
-
-    private System.Collections.IEnumerator LightUpNeighbours(HexCellBehaviour cell)
-    {
-        HexCellBehaviour n;
-
-        n = GetNeighbour(cell, HexPassable.N);
-        if (n != null)
-        {
-            Debug.Log("North, direction = " + FindDirection(cell, n));
-            n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
-        n = GetNeighbour(cell, HexPassable.NE);
-        if (n != null)
-        {
-            Debug.Log("North East, direction = " + FindDirection(cell, n));
-            if (n != null) n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
-
-        n = GetNeighbour(cell, HexPassable.SE);
-        if (n != null)
-        {
-            Debug.Log("South East, direction = " + FindDirection(cell, n));
-            n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
-        n = GetNeighbour(cell, HexPassable.S);
-        if (n != null)
-        {
-            Debug.Log("South, direction = " + FindDirection(cell, n));
-            n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
-        n = GetNeighbour(cell, HexPassable.SW);
-        if (n != null)
-        {
-            Debug.Log("South West, direction = " + FindDirection(cell, n));
-            n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
-        n = GetNeighbour(cell, HexPassable.NW);
-        if (n != null)
-        {
-            Debug.Log("North West, direction = " + FindDirection(cell, n));
-            n.SetHighLight(true);
-            yield return new WaitForSeconds(1f);
-            n.SetHighLight(false);
-        }
     }
 
     [ContextMenu("Create Grid")]

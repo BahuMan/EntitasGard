@@ -2,7 +2,7 @@
 using Entitas;
 using System;
 
-namespace Systems.Command
+namespace Systems.Command.Attack
 {
     public class AttackCommand : ReactiveSystem<InputEntity>
     {

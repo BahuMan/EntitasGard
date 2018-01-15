@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using Entitas;
-using UnityEngine;
+using UnityEngine; //no dependency; only as a lib for Vector/Quaternion calculations
 
-namespace Systems.Command.Execution
+namespace Systems.Command.Navigation
 {
     public class ExecuteNavigation : IExecuteSystem
     {
-
+        GameContext _game;
         public float CLOSE_ENOUGH = 0.001f;
         IGroup<GameEntity> _navigatingUnits;
 
         public ExecuteNavigation(Contexts contexts)
         {
+            _game = contexts.game;
             _navigatingUnits = contexts.game.GetGroup(GameMatcher.AllOf(
                 GameMatcher.WorldCoordinates,
                 GameMatcher.Location,
@@ -26,11 +27,13 @@ namespace Systems.Command.Execution
                 HexCellBehaviour curCell = unit.location.cell;
                 Stack<HexCellBehaviour> path = unit.navigationPath.path;
 
-                //three possibilities:
+                if (unit.isNavigationBlocked) continue; //skip blocked units
+
+                //four possibilities:
                 //1. we need to rotate before moving towards the next cell
                 //2. we're moving to the next cell but still in our "own" cell
                 //3. we're already in the next cell but still moving to the center
-                //4. we've arrived (and this is possibly the last move)
+                //4. we've arrived at center of the cell (and this is possibly the last move)
 
                 //the code checks above in the opposite order:
 
@@ -38,10 +41,18 @@ namespace Systems.Command.Execution
 
                 if (todist < CLOSE_ENOUGH)
                 {
-                    //4. we've arrived
+                    //4. we've arrived at center of the cell
                     path.Pop();
-                    if (path.Count > 0) unit.ReplaceNavigationPath(path);
-                    else unit.RemoveNavigationTarget();
+                    if (path.Count > 0)
+                    {
+                        CheckForObstructions(unit, path);
+                        unit.ReplaceNavigationPath(path);
+                    }
+                    else
+                    {
+                        unit.RemoveNavigationTarget();
+                    }
+
                     break;
                 }
 
@@ -49,6 +60,7 @@ namespace Systems.Command.Execution
                 if (todist < fromdist)
                 {
                     //3. we're closer to next cell but still moving to center
+                    if (unit.hasLocation) unit.ReplaceLeaveCell(unit.location.cell, unit.location.cellid);
                     unit.ReplaceLocation(path.Peek(), path.Peek().GetComponent<EntitasLink>().id);
                     //no break, we need to add movement vector
                 }
@@ -68,6 +80,13 @@ namespace Systems.Command.Execution
                 //1. not oriented towards destination cell; unit should only rotate and not move
                 unit.ReplaceMove(0, 0, roty);
             }
+        }
+
+        private bool CheckForObstructions(GameEntity unit, Stack<HexCellBehaviour> path)
+        {
+            HashSet<GameEntity> cells = _game.GetEntitiesWithLocation(path.Peek().GetComponent<EntitasLink>().id);
+            unit.isNavigationBlocked = (cells.Count > 0);
+            return unit.isNavigationBlocked;
         }
 
         private float CalcRotationY(WorldCoordinatesComponent worldCoordinates, Vector3 dir, float rotationSpeed)

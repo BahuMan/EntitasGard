@@ -5,6 +5,8 @@ using System;
 [SelectionBase]
 public class HexCellBehaviour : MonoBehaviour {
 
+    public int traverseCost = 1;
+
     [SerializeField, EnumFlag("Passable")]
     public HexPassable _hexPassable;
 
@@ -22,6 +24,7 @@ public class HexCellBehaviour : MonoBehaviour {
 #pragma warning disable 0649
     [SerializeField]
     private Renderer _N, _S, _NE, _SE, _NW, _SW;
+
 
     private void Awake()
     {

@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine;
 
-namespace Systems.Command.Execution
+namespace Systems.Command.Attack
 {
     public class AttackExecute : IExecuteSystem
     {

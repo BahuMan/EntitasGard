@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Systems.Command.Execution
+namespace Systems.Command.Attack
 {
     public class AimGun : IExecuteSystem
     {
@@ -24,13 +24,15 @@ namespace Systems.Command.Execution
                 float mustRotate = CalcRotationY(attacker.worldCoordinates, defender.worldCoordinates, attacker.weapon, attacker.weaponRotation);
                 if (Math.Abs(mustRotate) < NEAR_ZERO)
                 {
+                    float rotationInFrame = Mathf.Sign(mustRotate) * Mathf.Min(Mathf.Abs(mustRotate), attacker.weapon.rotationSpeed) * Time.deltaTime;
                     attacker.isWeaponAimed = true;
-                    attacker.ReplaceRotateWeapon(mustRotate);
+                    attacker.ReplaceRotateWeapon(rotationInFrame);
                 }
                 else
                 {
+                    float rotationInFrame = Mathf.Sign(mustRotate) * Mathf.Min(Mathf.Abs(mustRotate), attacker.weapon.rotationSpeed) * Time.deltaTime;
                     attacker.isWeaponAimed = false;
-                    attacker.ReplaceRotateWeapon(mustRotate);
+                    attacker.ReplaceRotateWeapon(rotationInFrame);
                 }
             }
         }
@@ -42,8 +44,7 @@ namespace Systems.Command.Execution
             Quaternion from = Quaternion.Euler(0, wr.ry, 0);
             //Quaternion from = new Quaternion(attacker.rx, attacker.ry, attacker.rz, attacker.rw);
             Quaternion to = Quaternion.LookRotation(dir, Vector3.up);
-            Quaternion res = Quaternion.RotateTowards(from, to, weapon.rotationSpeed * Time.deltaTime);
-            return Mathf.DeltaAngle(from.eulerAngles.y, res.eulerAngles.y);
+            return Mathf.DeltaAngle(from.eulerAngles.y, to.eulerAngles.y);
         }
 
         private Vector3 CalcVector3(WorldCoordinatesComponent attacker, WorldCoordinatesComponent defender)

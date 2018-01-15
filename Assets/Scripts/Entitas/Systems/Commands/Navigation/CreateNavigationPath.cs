@@ -2,7 +2,7 @@
 using UnityEngine;
 using Entitas;
 
-namespace Systems.Command.Execution
+namespace Systems.Command.Navigation
 {
     public class CreateNavigationPath : ReactiveSystem<GameEntity>
     {
@@ -34,6 +34,7 @@ namespace Systems.Command.Execution
                 if (!unit.hasNavigationTarget)
                 {
                     if (unit.hasNavigationPath) unit.RemoveNavigationPath();
+                    unit.isNavigationBlocked = false;
                 }
                 else
                 {
@@ -43,6 +44,9 @@ namespace Systems.Command.Execution
                     HexCellBehaviour toCell = toCellEntity.gameObject.value.GetComponent<HexCellBehaviour>();
 
                     Stack<HexCellBehaviour> p = _grid.FindPath(fromCell, toCell);
+
+                    p.Pop(); //remove first cell = current cell
+
                     unit.ReplaceNavigationPath(p);
                 }
             }

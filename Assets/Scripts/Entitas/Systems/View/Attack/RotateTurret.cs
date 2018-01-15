@@ -19,7 +19,7 @@ namespace Systems.View.Attack
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
             //not only when turret rotates, but also when unit moves, we need to feed back current turret rotation
-            return context.CreateCollector(GameMatcher.AllOf(GameMatcher.RotateWeapon, GameMatcher.Move));
+            return context.CreateCollector(GameMatcher.AnyOf(GameMatcher.RotateWeapon, GameMatcher.Move));
         }
 
         protected override bool Filter(GameEntity entity)

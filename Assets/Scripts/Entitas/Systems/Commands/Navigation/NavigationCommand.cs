@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-namespace Systems.Command
+namespace Systems.Command.Navigation
 {
     public class NavigationCommand : ReactiveSystem<InputEntity>
     {

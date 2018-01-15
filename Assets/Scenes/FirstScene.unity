@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 27
   cubeCoordinates: {x: 2, y: 2, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -700,6 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 13
   cubeCoordinates: {x: 1, y: -2, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -3327,6 +3329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 33
   cubeCoordinates: {x: -5, y: 0, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -4904,6 +4907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 44
   cubeCoordinates: {x: -1, y: 5, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -5047,6 +5051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 37
   cubeCoordinates: {x: -1, y: 1, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -5336,7 +5341,7 @@ RectTransform:
   - {fileID: 1333926371}
   - {fileID: 853571094}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5706,6 +5711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 0, y: -1, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -5820,6 +5826,11 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &224243009 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23474538782485050, guid: 5930e7ea72ee296478e7870b1cec6965,
+    type: 2}
+  m_PrefabInternal: {fileID: 1161697197}
 --- !u!1 &228829784
 GameObject:
   m_ObjectHideFlags: 0
@@ -6015,6 +6026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 1, y: -3, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -7705,6 +7717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 57
   cubeCoordinates: {x: -5, y: 4, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -7932,6 +7945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 30
   cubeCoordinates: {x: 0, y: -4, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -8073,6 +8087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 56
   cubeCoordinates: {x: -5, y: 1, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -8634,6 +8649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 52
   cubeCoordinates: {x: -4, y: 1, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -9962,6 +9978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 57
   cubeCoordinates: {x: 0, y: -2, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -10414,6 +10431,11 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &411305701 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23228474006189888, guid: c5c04f15b7930b34e9b2b2a021480690,
+    type: 2}
+  m_PrefabInternal: {fileID: 1201596439}
 --- !u!1 &411682799
 GameObject:
   m_ObjectHideFlags: 0
@@ -11707,6 +11729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 9
   cubeCoordinates: {x: 5, y: -3, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -12352,6 +12375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 19
   cubeCoordinates: {x: -2, y: -3, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -12409,6 +12433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 59
   cubeCoordinates: {x: 1, y: -1, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -13054,6 +13079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 29
   cubeCoordinates: {x: -1, y: 2, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -13111,6 +13137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 60
   cubeCoordinates: {x: -2, y: 5, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -13909,6 +13936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 53
   cubeCoordinates: {x: 0, y: 4, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -15203,6 +15231,72 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1001 &593878144
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099016545008378, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1325748577672170, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_Name
+      value: DefenseTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998316327137244, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998316327137244, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998316327137244, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998316327137244, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998316327137244, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 978bfb4bba46e8240bef3d6e28618064, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &599610632
 GameObject:
   m_ObjectHideFlags: 0
@@ -15734,6 +15828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 35
   cubeCoordinates: {x: -2, y: 3, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -16129,6 +16224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 12
   cubeCoordinates: {x: 5, y: -1, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -16858,6 +16954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 6
   cubeCoordinates: {x: 5, y: 0, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -16915,6 +17012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 29
   cubeCoordinates: {x: 3, y: -4, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -17140,6 +17238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 46
   cubeCoordinates: {x: 4, y: -2, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -17365,6 +17464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 5, y: -2, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -17928,6 +18028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 59
   cubeCoordinates: {x: 2, y: 0, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -17985,6 +18086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: 3, y: -2, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -18212,6 +18314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 45
   cubeCoordinates: {x: -3, y: 2, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -18353,6 +18456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 3, y: 1, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -18662,6 +18766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 35
   cubeCoordinates: {x: -4, y: 3, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -19715,6 +19820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 59
   cubeCoordinates: {x: 2, y: -2, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -19856,6 +19962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 61
   cubeCoordinates: {x: 0, y: 0, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -20333,6 +20440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 17
   cubeCoordinates: {x: -4, y: -1, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -20728,6 +20836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 55
   cubeCoordinates: {x: 0, y: -3, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -23143,6 +23252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 47
   cubeCoordinates: {x: 3, y: 0, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -23710,6 +23820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: -1, y: 3, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -24019,6 +24130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 33
   cubeCoordinates: {x: -3, y: -1, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -25336,6 +25448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 58
   cubeCoordinates: {x: -1, y: 0, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -25897,6 +26010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 26
   cubeCoordinates: {x: 3, y: 2, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -26716,6 +26830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 28
   cubeCoordinates: {x: -2, y: -1, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -27447,6 +27562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 30
   cubeCoordinates: {x: 1, y: 4, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -29260,6 +29376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 3
   cubeCoordinates: {x: 5, y: -5, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -29485,6 +29602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 52
   cubeCoordinates: {x: -4, y: 2, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -29626,6 +29744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 31
   cubeCoordinates: {x: -3, y: 4, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -29767,6 +29886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 29
   cubeCoordinates: {x: -3, y: 3, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -31720,6 +31840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: 0, y: 1, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -31945,6 +32066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 57
   cubeCoordinates: {x: 2, y: -4, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -32086,6 +32208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: -3, y: 1, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -33399,6 +33522,11 @@ Prefab:
       propertyPath: EntitasBlueprint
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23228474006189888, guid: c5c04f15b7930b34e9b2b2a021480690,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2bd2c49e0cd603c48bedbc747c34ba1b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5c04f15b7930b34e9b2b2a021480690, type: 2}
   m_IsPrefabParent: 0
@@ -33824,6 +33952,11 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &1208112701 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23399710709603726, guid: 978bfb4bba46e8240bef3d6e28618064,
+    type: 2}
+  m_PrefabInternal: {fileID: 593878144}
 --- !u!1 &1213697057
 GameObject:
   m_ObjectHideFlags: 0
@@ -33935,6 +34068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 53
   cubeCoordinates: {x: 1, y: 1, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -34160,6 +34294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: 3, y: -1, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -34553,6 +34688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 5, y: -4, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -36040,6 +36176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 33
   cubeCoordinates: {x: -5, y: 2, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -36605,6 +36742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 56
   cubeCoordinates: {x: 4, y: -4, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -36754,6 +36892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 57
   cubeCoordinates: {x: -2, y: -2, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -38407,6 +38546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 60
   cubeCoordinates: {x: -4, y: 5, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -38548,6 +38688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 52
   cubeCoordinates: {x: 4, y: -1, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -40264,6 +40405,11 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &1451126338 stripped
+MeshRenderer:
+  m_PrefabParentObject: {fileID: 23244624537270870, guid: 5930e7ea72ee296478e7870b1cec6965,
+    type: 2}
+  m_PrefabInternal: {fileID: 1161697197}
 --- !u!1 &1451500544
 GameObject:
   m_ObjectHideFlags: 0
@@ -40291,6 +40437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 10
   cubeCoordinates: {x: 0, y: 2, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -40381,7 +40528,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459715660
 GameObject:
@@ -43198,6 +43345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 30
   cubeCoordinates: {x: 2, y: 3, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -43255,6 +43403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 15
   cubeCoordinates: {x: 3, y: -3, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -43564,6 +43713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 45
   cubeCoordinates: {x: -4, y: 4, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -43957,6 +44107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 7
   cubeCoordinates: {x: 4, y: -5, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -44518,6 +44669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: 1, y: 3, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -44548,6 +44700,25 @@ Transform:
   m_Father: {fileID: 367757352}
   m_RootOrder: 59
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1580464919 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1625331544801636, guid: 5930e7ea72ee296478e7870b1cec6965,
+    type: 2}
+  m_PrefabInternal: {fileID: 1161697197}
+--- !u!114 &1580464924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1580464919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f70127c494ed04fa5bb5dc242f2796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer:
+  - {fileID: 224243009}
+  - {fileID: 1451126338}
 --- !u!1 &1580614508
 GameObject:
   m_ObjectHideFlags: 0
@@ -44745,6 +44916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 3
   cubeCoordinates: {x: 0, y: -5, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -45054,6 +45226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 19
   cubeCoordinates: {x: 4, y: -3, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -45869,6 +46042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 18
   cubeCoordinates: {x: -3, y: -2, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -46010,6 +46184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 36
   cubeCoordinates: {x: 4, y: 0, z: -4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -46403,6 +46578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 3
   cubeCoordinates: {x: 1, y: -5, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -46796,6 +46972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 27
   cubeCoordinates: {x: 1, y: -4, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -46853,6 +47030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 22
   cubeCoordinates: {x: -2, y: 0, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -46994,6 +47172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 43
   cubeCoordinates: {x: -1, y: -1, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -47135,6 +47314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 38
   cubeCoordinates: {x: -2, y: 2, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -47276,6 +47456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: -1, y: 4, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -47585,6 +47766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 50
   cubeCoordinates: {x: -1, y: -4, z: 5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -48566,6 +48748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 9
   cubeCoordinates: {x: -5, y: 3, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -49467,6 +49650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 46
   cubeCoordinates: {x: -4, y: 0, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -49524,6 +49708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 52
   cubeCoordinates: {x: -2, y: 1, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -49665,6 +49850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 41
   cubeCoordinates: {x: 2, y: -3, z: 1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -50058,6 +50244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 40
   cubeCoordinates: {x: -5, y: 5, z: 0}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -51547,6 +51734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 57
   cubeCoordinates: {x: -2, y: 4, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -51604,6 +51792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 44
   cubeCoordinates: {x: -3, y: 5, z: -2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -51913,6 +52102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 27
   cubeCoordinates: {x: 1, y: 2, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -51970,6 +52160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 63
   cubeCoordinates: {x: 2, y: 1, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -53346,6 +53537,24 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1879909115 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1916085596504524, guid: c5c04f15b7930b34e9b2b2a021480690,
+    type: 2}
+  m_PrefabInternal: {fileID: 1201596439}
+--- !u!114 &1879909119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1879909115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f70127c494ed04fa5bb5dc242f2796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer:
+  - {fileID: 411305701}
 --- !u!1 &1886047874
 GameObject:
   m_ObjectHideFlags: 0
@@ -53963,6 +54172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 18
   cubeCoordinates: {x: 4, y: 1, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -54276,6 +54486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 54
   cubeCoordinates: {x: 0, y: 3, z: -3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -55095,6 +55306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 28
   cubeCoordinates: {x: 0, y: 5, z: -5}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -55394,6 +55606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 39
   cubeCoordinates: {x: 3, y: -5, z: 2}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -55619,6 +55832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 61
   cubeCoordinates: {x: 2, y: -1, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -55844,6 +56058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 31
   cubeCoordinates: {x: -1, y: -2, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -58458,6 +58673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 47
   cubeCoordinates: {x: -3, y: 0, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -59187,6 +59403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 51
   cubeCoordinates: {x: -1, y: -3, z: 4}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -59496,6 +59713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 14
   cubeCoordinates: {x: 1, y: 0, z: -1}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -59553,6 +59771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207533275b062646a7e6ebb6b499cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traverseCost: 1
   _hexPassable: 35
   cubeCoordinates: {x: 2, y: -5, z: 3}
   _highLight: {fileID: 2100000, guid: 25d4398a814dc604cace18e2ecc43c7d, type: 2}
@@ -61185,6 +61404,24 @@ Transform:
   m_Father: {fileID: 193629893}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 60.000004, z: 0}
+--- !u!1 &2117769472 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1325748577672170, guid: 978bfb4bba46e8240bef3d6e28618064,
+    type: 2}
+  m_PrefabInternal: {fileID: 593878144}
+--- !u!114 &2117769476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2117769472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f70127c494ed04fa5bb5dc242f2796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer:
+  - {fileID: 1208112701}
 --- !u!1 &2120052861
 GameObject:
   m_ObjectHideFlags: 0
