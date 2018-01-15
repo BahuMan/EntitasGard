@@ -3,5 +3,5 @@ using UnityEngine.UI;
 
 public class HexSelectable: MonoBehaviour
 {
-    public Image Thumbnail;
+    public Sprite Thumbnail;
 }

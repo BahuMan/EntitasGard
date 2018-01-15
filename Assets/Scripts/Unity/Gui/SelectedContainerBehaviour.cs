@@ -47,8 +47,8 @@ public class SelectedContainerBehaviour : MonoBehaviour {
         Button thumb = Instantiate<Button>(_buttonPrefab);
         thumb.GetComponent<RectTransform>().SetParent(this.GetComponent<RectTransform>());
         thumb.gameObject.SetActive(true);
-        thumb.image = selectable.Thumbnail;
         thumb.transform.GetChild(0).GetComponent<Text>().text = sel.name;
+        thumb.transform.GetChild(1).GetComponent<Image>().sprite = selectable.Thumbnail;
         thumb.onClick.AddListener(() => { if (UnselectRequested != null) UnselectRequested.Invoke(sel); });
 
         forward[sel] = thumb;
