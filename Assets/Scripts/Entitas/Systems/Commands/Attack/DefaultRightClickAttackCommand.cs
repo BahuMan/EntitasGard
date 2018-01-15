@@ -4,12 +4,12 @@ using System;
 
 namespace Systems.Command.Attack
 {
-    public class AttackCommand : ReactiveSystem<InputEntity>
+    public class DefaultRightClickAttackCommand : ReactiveSystem<InputEntity>
     {
         private GameContext _game;
         private IGroup<GameEntity> _selectedAttackingUnits;
 
-        public AttackCommand(Contexts contexts): base(contexts.input)
+        public DefaultRightClickAttackCommand(Contexts contexts): base(contexts.input)
         {
             _game = contexts.game;
             _selectedAttackingUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Weapon));
@@ -30,28 +30,33 @@ namespace Systems.Command.Attack
             if (entities.Count != 1) throw new ArgumentException("found " + entities.Count + " right mouse click?");
 
             InputEntity click = entities[0];
-            GameEntity attackTarget = _game.GetEntityWithID(click.mouseOverEntity.value);
+            GameEntity targetEntity = _game.GetEntityWithID(click.mouseOverEntity.value);
+            AttackTarget(_game, targetEntity, _selectedAttackingUnits);
+        }
 
-            if (!attackTarget.hasHealth)
+        //made static, so I can call the function in UILeftClickAttack
+        public static void AttackTarget(GameContext _game, GameEntity targetEntity, IGroup<GameEntity> _selectedAttackingUnits)
+        {
+            if (!targetEntity.hasHealth)
             {
                 //maybe we clicked the location rather than the unit to be attacked?
-                if (attackTarget.hasHexCell && attackTarget.hasID)
+                if (targetEntity.hasHexCell && targetEntity.hasID)
                 {
                     //I expect only one object per location, but I'm not checking:
-                    foreach (var t in _game.GetEntitiesWithLocation(attackTarget.iD.value))
+                    foreach (var t in _game.GetEntitiesWithLocation(targetEntity.iD.value))
                     {
-                        if (t.hasHealth) attackTarget = t;
+                        if (t.hasHealth) targetEntity = t;
                     }
                 }
             }
 
             //again, check (because the right-click might have been a navigation
             //command and in that case we need to fail silently
-            if (attackTarget.hasHealth)
+            if (targetEntity.hasHealth)
             {
                 foreach (var unit in _selectedAttackingUnits)
                 {
-                    unit.ReplaceAttackTarget(attackTarget.iD.value);
+                    unit.ReplaceAttackTarget(targetEntity.iD.value);
                 }
             }
             else
@@ -64,6 +69,7 @@ namespace Systems.Command.Attack
                 }
 
             }
+
         }
     }
 }

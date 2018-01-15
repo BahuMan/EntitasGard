@@ -11,7 +11,8 @@ public class RootSystem : Feature
         Add(new Systems.Input.MouseInput(contexts));
         Add(new Systems.Selection.ClickSelect(contexts));
 
-        Add(new Systems.Command.Attack.AttackCommand(contexts));
+        Add(new Systems.Command.Attack.UILeftClickAttack(contexts));
+        Add(new Systems.Command.Attack.DefaultRightClickAttackCommand(contexts));
         Add(new Systems.Command.Attack.AimGun(contexts));
         Add(new Systems.Command.Attack.AttackExecute(contexts));
 
@@ -28,10 +29,12 @@ public class RootSystem : Feature
         Add(new Systems.View.Attack.FireWeaponInUnity(contexts));
         Add(new Systems.View.ShowSelectionBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
+        Add(new Systems.View.CommandView(contexts));
         //Add(new Systems.View.MouseHoverDebug(contexts));
         Add(new Systems.View.LogDebugMessageSystem(contexts));
 
         Add(new Systems.Cleanup.MoveCleanup(contexts));
+
     }
 
     //this method gets called whenever a game entity has been created

@@ -10,6 +10,7 @@ namespace Systems.Selection
 
         public const float MAX_CLICK_DISTANCE = 5; //nr of pixels between button up and button down
 
+        IGroup<InputEntity> _UICommands;
         IGroup<InputEntity> _leftClicks;
         IGroup<GameEntity> _selected;
         IGroup<GameEntity> _selectable;
@@ -21,6 +22,7 @@ namespace Systems.Selection
             _input = contexts.input;
             _game = contexts.game;
             _leftClicks = _input.GetGroup(InputMatcher.MouseLeftDown);
+            _UICommands = _input.GetGroup(InputMatcher.UICommand);
             _selected = _game.GetGroup(GameMatcher.Selected);
             _selectable = _game.GetGroup(GameMatcher.Selectable);
         }
@@ -37,6 +39,11 @@ namespace Systems.Selection
 
         protected override void Execute(List<InputEntity> entities)
         {
+
+            //if a ui command is active, this system should not interpret the mouse click as a select action
+            if (_UICommands.count > 0) return;
+
+
             var cs = _leftClicks.GetEnumerator();
             cs.MoveNext();
             var clickStart = cs.Current; //there should be exactly one clickStart entity

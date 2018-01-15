@@ -23,6 +23,8 @@ namespace Systems.Input
 
         void IExecuteSystem.Execute()
         {
+            //ignore interaction with UI:
+            if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
 
             InputEntity m = _input.CreateEntity();
 

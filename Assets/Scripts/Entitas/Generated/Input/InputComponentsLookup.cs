@@ -19,8 +19,11 @@ public static class InputComponentsLookup {
     public const int ScreenCoordinates = 8;
     public const int SelectionBox = 9;
     public const int TimeLine = 10;
+    public const int UIAttack = 11;
+    public const int UICommand = 12;
+    public const int UINavigate = 13;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "ID",
@@ -33,7 +36,10 @@ public static class InputComponentsLookup {
         "NavigateCommand",
         "ScreenCoordinates",
         "SelectionBox",
-        "TimeLine"
+        "TimeLine",
+        "UIAttack",
+        "UICommand",
+        "UINavigate"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -47,6 +53,9 @@ public static class InputComponentsLookup {
         typeof(NavigateCommandComponent),
         typeof(ScreenCoordinates),
         typeof(SelectionBoxComponent),
-        typeof(TimeLineComponent)
+        typeof(TimeLineComponent),
+        typeof(UIAttackComponent),
+        typeof(UICommand),
+        typeof(UINavigateComponent)
     };
 }
