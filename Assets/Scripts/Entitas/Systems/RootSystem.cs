@@ -16,6 +16,7 @@ public class RootSystem : Feature
         Add(new Systems.Command.Attack.AimGun(contexts));
         Add(new Systems.Command.Attack.AttackExecute(contexts));
 
+        Add(new Systems.Command.Navigation.UILeftClickNavigate(contexts));
         Add(new Systems.Command.Navigation.NavigationCommand(contexts));
         Add(new Systems.Command.Navigation.CreateNavigationPath(contexts));
         Add(new Systems.Command.Navigation.ExecuteNavigation(contexts));

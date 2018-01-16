@@ -1,23 +1,26 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Presets
 {
-    public enum EntitasPresetEnum { BARRACKS, VEHICLE, TURRET }
+    public enum EntitasPresetEnum { BASE, BARRACKS, VEHICLE, TURRET }
+
+    [System.Serializable]
+    public class PrefabMapping
+    {
+        public Presets.EntitasPresetEnum preset;
+        public EntitasInit prefab;
+    }
+
+    public PrefabMapping[] prefabs;
 
     private GameContext _game;
     private HexGridBehaviour _grid;
-
-    public Presets(GameContext game, HexGridBehaviour grid)
-    {
-        _game = game;
-        _grid = grid;
-    }
 
     public GameEntity CreateBlueprint(EntitasInit UnityObject)
     {
         switch (UnityObject.EntitasBlueprint)
         {
+            case EntitasPresetEnum.BASE: return CreateBase(UnityObject);
             case EntitasPresetEnum.BARRACKS: return CreateBarracks(UnityObject);
             case EntitasPresetEnum.VEHICLE: return CreateVehicle(UnityObject);
             case EntitasPresetEnum.TURRET: return CreateTurret(UnityObject);
@@ -25,6 +28,16 @@ public class Presets
 
         Debug.LogError("Preset code couldn't create Entity for " + UnityObject.name);
         return null;
+    }
+
+    private GameEntity CreateBase(EntitasInit unityObject)
+    {
+        GameEntity ge = CreateCommon(unityObject);
+
+        ge.AddHealth(500);
+        ge.isCanBuildTower = true;
+        ge.isCanBuildBarracks = true;
+        return ge;
     }
 
     private GameEntity CreateTurret(EntitasInit unityObject)
@@ -39,7 +52,7 @@ public class Presets
         return ge;
     }
 
-    public GameEntity CreateVehicle(EntitasInit unityObject)
+    private GameEntity CreateVehicle(EntitasInit unityObject)
     {
         GameEntity ge = CreateCommon(unityObject);
 
@@ -57,6 +70,7 @@ public class Presets
         GameEntity ge = CreateCommon(unityObject);
 
         ge.AddHealth(500);
+        ge.isCanBuildVehicle = true;
 
         return ge;
     }
@@ -81,6 +95,12 @@ public class Presets
         if (selectable != null)
         {
             ge.isSelectable = true;
+        }
+
+        TeamColor team = unityObject.GetComponent<TeamColor>();
+        if (team != null)
+        {
+            ge.AddTeam(team.teamNr);
         }
 
         //now that the entity has been created with a unique ID,

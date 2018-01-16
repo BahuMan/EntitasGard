@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114332210025867902}
   - component: {fileID: 114753554471783634}
   m_Layer: 0
-  m_Name: Turret
+  m_Name: DefenseTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec6a74572f8f674d896c08887d2c2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntitasBlueprint: 2
+  EntitasBlueprint: 3
 --- !u!114 &114332210025867902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e321f71f1188fee469b64d1f12d63435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thumbnail: {fileID: 0}
+  Thumbnail: {fileID: 21300000, guid: d37e7f50f82206149a2f6640a6dcb3aa, type: 3}
 --- !u!114 &114753554471783634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,6 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f70127c494ed04fa5bb5dc242f2796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamNr: 0
   _renderer:
   - {fileID: 23399710709603726}
 --- !u!135 &135699950571522240

@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec6a74572f8f674d896c08887d2c2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntitasBlueprint: 0
+  EntitasBlueprint: 1
 --- !u!114 &114811125994552006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f70127c494ed04fa5bb5dc242f2796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamNr: 0
   _renderer:
   - {fileID: 23474538782485050}
   - {fileID: 23244624537270870}
@@ -384,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e321f71f1188fee469b64d1f12d63435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Thumbnail: {fileID: 0}
+  Thumbnail: {fileID: 21300000, guid: 88cdf0635ca4f26458967c4c1b7f23ff, type: 3}
 --- !u!136 &136016899543072090
 CapsuleCollider:
   m_ObjectHideFlags: 1

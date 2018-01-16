@@ -20,10 +20,13 @@ public static class InputComponentsLookup {
     public const int SelectionBox = 9;
     public const int TimeLine = 10;
     public const int UIAttack = 11;
-    public const int UICommand = 12;
-    public const int UINavigate = 13;
+    public const int UIBuildBarracks = 12;
+    public const int UIBuildTower = 13;
+    public const int UICommand = 14;
+    public const int UINavigate = 15;
+    public const int UINewVehicle = 16;
 
-    public const int TotalComponents = 14;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "ID",
@@ -38,8 +41,11 @@ public static class InputComponentsLookup {
         "SelectionBox",
         "TimeLine",
         "UIAttack",
+        "UIBuildBarracks",
+        "UIBuildTower",
         "UICommand",
-        "UINavigate"
+        "UINavigate",
+        "UINewVehicle"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -55,7 +61,10 @@ public static class InputComponentsLookup {
         typeof(SelectionBoxComponent),
         typeof(TimeLineComponent),
         typeof(UIAttackComponent),
+        typeof(UIBuildBarracks),
+        typeof(UIBuildTower),
         typeof(UICommand),
-        typeof(UINavigateComponent)
+        typeof(UINavigateComponent),
+        typeof(UINewVehicle)
     };
 }

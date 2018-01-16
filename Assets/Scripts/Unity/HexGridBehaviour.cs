@@ -85,7 +85,6 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
 
         if (found)
         {
-            Debug.Log("Found a path!");
             for (HexCellBehaviour cell = to; cell != from; cell = parent[cell])
             {
                 path.Push(cell);

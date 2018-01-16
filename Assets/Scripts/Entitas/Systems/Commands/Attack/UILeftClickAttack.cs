@@ -29,6 +29,9 @@ namespace Systems.Command.Attack
 
         protected override void Execute(List<InputEntity> entities)
         {
+            //this system does not apply when no UI command active
+            if (_UICommands.count == 0) return;
+
             //quit when another (non-attack) UI command is active
             foreach (var ui in _UICommands.GetEntities())
             {

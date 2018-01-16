@@ -2,6 +2,8 @@
 
 public class TeamColor : MonoBehaviour {
 
+    public int teamNr = 0;
+
     public Renderer[] _renderer;
 
     public Color teamColor

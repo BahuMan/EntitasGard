@@ -3,7 +3,7 @@ using Index;
 
 public class EntitasGameController : MonoBehaviour {
 
-    Entitas.Systems _systems;
+    private Entitas.Systems _systems;
 
 	// Use this for initialization
 	void Start () {
