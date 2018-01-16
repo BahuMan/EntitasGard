@@ -4,17 +4,32 @@ public class Presets
 {
     public enum EntitasPresetEnum { BASE, BARRACKS, VEHICLE, TURRET }
 
-    [System.Serializable]
-    public class PrefabMapping
-    {
-        public Presets.EntitasPresetEnum preset;
-        public EntitasInit prefab;
-    }
-
-    public PrefabMapping[] prefabs;
-
     private GameContext _game;
     private HexGridBehaviour _grid;
+
+    public Presets(GameContext game, HexGridBehaviour grid)
+    {
+        _game = game;
+        _grid = grid;
+    }
+
+    public GameEntity CreateBlueprint(EntitasPresetEnum preset)
+    {
+        return CreateBlueprint(PresetToPrefab(preset));
+    }
+
+    private EntitasInit PresetToPrefab(EntitasPresetEnum preset)
+    {
+        switch (preset)
+        {
+            case EntitasPresetEnum.BASE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Base"));
+            case EntitasPresetEnum.BARRACKS: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Barracks"));
+            case EntitasPresetEnum.VEHICLE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Unit"));
+            case EntitasPresetEnum.TURRET: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("DefenseTower"));
+        }
+        Debug.LogError("Preset code couldn't create Unity prefab for " + System.Enum.GetName(typeof(EntitasPresetEnum), preset));
+        return null;
+    }
 
     public GameEntity CreateBlueprint(EntitasInit UnityObject)
     {

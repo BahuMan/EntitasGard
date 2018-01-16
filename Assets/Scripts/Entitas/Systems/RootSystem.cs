@@ -9,7 +9,10 @@ public class RootSystem : Feature
 
         Add(new InitHelloWorld(contexts));
         Add(new Systems.Input.MouseInput(contexts));
+        //end of unity-specific systems
+
         Add(new Systems.Selection.ClickSelect(contexts));
+        Add(new Systems.Command.UI.BuildCommands(contexts));
 
         Add(new Systems.Command.Attack.UILeftClickAttack(contexts));
         Add(new Systems.Command.Attack.DefaultRightClickAttackCommand(contexts));
@@ -23,7 +26,8 @@ public class RootSystem : Feature
         Add(new Systems.Command.Navigation.UpdateNavigationCostWithOccupiedLocations(contexts));
         Add(new Systems.Command.Navigation.Detour(contexts));
 
-
+        //start of unity-specific systems:
+        Add(new Systems.View.MoveToStartPosition(contexts));
         Add(new Systems.View.ShowEnRoute(contexts));
         Add(new Systems.View.MoveInUnity(contexts));
         Add(new Systems.View.Attack.RotateTurretInUnity(contexts)); //must come after MoveInUnity

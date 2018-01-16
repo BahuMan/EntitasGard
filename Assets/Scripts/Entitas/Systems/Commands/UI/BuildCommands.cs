@@ -34,26 +34,33 @@ namespace Systems.Command.UI
             }
 
             GameEntity overEntity = _game.GetEntityWithID(entities[0].mouseOverEntity.value);
+            if (!overEntity.hasHexCell) overEntity = _game.GetEntityWithID(overEntity.location.cellid);
+            if (!overEntity.hasHexCell) return;
 
-            foreach(var ui in _UICommands)
+            foreach (var ui in _UICommands.GetEntities())
             {
                 if (ui.isUIBuildBarracks) BuildBarracks(overEntity);
                 if (ui.isUIBuildTower) BuildTower(overEntity);
                 if (ui.isUINewVehicle) BuildNewVehicle(overEntity);
+                ui.Destroy();
             }
         }
 
-        private void BuildBarracks(GameEntity overEntity)
+        private void BuildBarracks(GameEntity location)
         {
-            throw new NotImplementedException();
+            GameEntity b = _presets.CreateBlueprint(Presets.EntitasPresetEnum.BARRACKS);
+            b.AddStartPosition(location.hexCell.worldx, location.hexCell.worldy, location.hexCell.worldz);
+            b.ReplaceLocation(location.gameObject.value.GetComponent<HexCellBehaviour>(), location.iD.value);
         }
 
-        private void BuildTower(GameEntity overEntity)
+        private void BuildTower(GameEntity location)
         {
-            throw new NotImplementedException();
+            GameEntity b = _presets.CreateBlueprint(Presets.EntitasPresetEnum.TURRET);
+            b.AddStartPosition(location.hexCell.worldx, location.hexCell.worldy, location.hexCell.worldz);
+            b.ReplaceLocation(location.gameObject.value.GetComponent<HexCellBehaviour>(), location.iD.value);
         }
 
-        private void BuildNewVehicle(GameEntity overEntity)
+        private void BuildNewVehicle(GameEntity location)
         {
             throw new NotImplementedException();
         }

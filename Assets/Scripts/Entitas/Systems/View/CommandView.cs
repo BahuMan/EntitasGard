@@ -26,7 +26,7 @@ namespace Systems.View
 
         private void panel_newVehicleCommand()
         {
-            Debug.Log("Build Tower UI command issues");
+            Debug.Log("Build vehicle command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;
