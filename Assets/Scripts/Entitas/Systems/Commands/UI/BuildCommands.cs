@@ -14,7 +14,7 @@ namespace Systems.Command.UI
 
         public BuildCommands(Contexts contexts): base(contexts.input)
         {
-            _UICommands = contexts.input.GetGroup(InputMatcher.UICommand);
+            _UICommands = contexts.input.GetGroup(InputMatcher.AnyOf(InputMatcher.UIBuildBarracks, InputMatcher.UIBuildTower));
             _game = contexts.game;
             _grid = UnityEngine.GameObject.FindObjectOfType<HexGridBehaviour>();
             _presets = new Presets(_game, _grid);

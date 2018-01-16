@@ -35,7 +35,7 @@ public class CommandPanelBehaviour : MonoBehaviour
         _buildBarracksButton.onClick.AddListener(() => { if (BuildBarracksCommand != null) BuildBarracksCommand(); });
         _buildTowerButton.onClick.AddListener(() => { if (BuildTowerCommand != null) BuildTowerCommand(); });
 
-        _newUnitButton.onClick.AddListener(() => { _newUnitSubMenu.gameObject.SetActive(_newUnitSubMenu.gameObject.activeSelf); });
+        _newUnitButton.onClick.AddListener(() => { _newUnitSubMenu.gameObject.SetActive(!_newUnitSubMenu.gameObject.activeSelf); });
         _newVehicleButton.onClick.AddListener(() => { if (newVehicleCommand != null) newVehicleCommand(); });
         ShowNothing();
     }

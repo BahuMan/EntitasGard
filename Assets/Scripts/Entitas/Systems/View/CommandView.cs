@@ -44,7 +44,6 @@ namespace Systems.View
 
         private void panel_BuildBarracksCommand()
         {
-            Debug.Log("Build Barracks UI command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;
@@ -53,7 +52,6 @@ namespace Systems.View
 
         private void panel_NavigateCommand()
         {
-            Debug.Log("Navigate UI command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;
@@ -62,7 +60,6 @@ namespace Systems.View
 
         private void panel_AttackCommand()
         {
-            Debug.Log("Attack UI command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;

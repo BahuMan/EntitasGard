@@ -13,6 +13,7 @@ public class RootSystem : Feature
 
         Add(new Systems.Selection.ClickSelect(contexts));
         Add(new Systems.Command.UI.BuildCommands(contexts));
+        Add(new Systems.Command.UI.NewUnitCommand(contexts));
 
         Add(new Systems.Command.Attack.UILeftClickAttack(contexts));
         Add(new Systems.Command.Attack.DefaultRightClickAttackCommand(contexts));
