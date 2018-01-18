@@ -12,7 +12,7 @@ namespace Systems.Command.Navigation
         public UILeftClickNavigate(Contexts contexts) : base(contexts.input)
         {
             _game = contexts.game;
-            _selectedNavigableUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Navigable));
+            _selectedNavigableUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Navigable, GameMatcher.UnderControl));
             _UICommands = contexts.input.GetGroup(InputMatcher.UICommand);
         }
 
@@ -50,7 +50,9 @@ namespace Systems.Command.Navigation
             }
             foreach (var unit in _selectedNavigableUnits)
             {
-                unit.ReplaceNavigationTarget(dest.iD.value);
+                if (unit.iD.value == dest.iD.value) continue; //don't move to self
+                if (unit.location.cellid == dest.iD.value) continue; //don't move to current location
+                    unit.ReplaceNavigationTarget(dest.iD.value);
             }
 
         }

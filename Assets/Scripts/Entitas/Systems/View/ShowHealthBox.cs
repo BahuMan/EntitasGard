@@ -19,15 +19,15 @@ namespace Systems.View
         {
             foreach (var e in entities)
             {
-                if (e.hasHealth)
-                {
-                    if (!e.hasUnityHealthBox) CreateHealthBox(e);
-                    e.unityHealthBox.value.Health = e.health.value;
-                }
-                else if (e.hasUnityHealthBox)
+                if (e.isKilled || !e.hasHealth)
                 {
                     GameObject.Destroy(e.unityHealthBox.value.gameObject);
                     e.RemoveUnityHealthBox();
+                }
+                else if (e.hasHealth)
+                {
+                    if (!e.hasUnityHealthBox) CreateHealthBox(e);
+                    e.unityHealthBox.value.Health = e.health.value;
                 }
             }
         }
@@ -48,7 +48,7 @@ namespace Systems.View
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.Health.AddedOrRemoved());
+            return context.CreateCollector(GameMatcher.Health.AddedOrRemoved(), GameMatcher.Killed.Added());
         }
     }
 }

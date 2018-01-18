@@ -109,7 +109,6 @@ public class PlayerCtrl
 
         for (int p=lineNr; p<_view.Count; ++p)
         {
-            UnityEngine.Debug.Log("Setting line nr to " + p);
             _view[p].SetLineNr(p);
             _model[p].Color = p; //workaround, because I dont want to implement color picker
         }

@@ -18,13 +18,20 @@ namespace Systems.Command.Attack
 
         void IExecuteSystem.Execute()
         {
-            foreach (var unit in _attackingUnits)
+            foreach (var unit in _attackingUnits.GetEntities())
             {
                 GameEntity attackTarget = _game.GetEntityWithID(unit.attackTarget.targetID);
                 if (attackTarget == null)
                 {
                     unit.RemoveAttackTarget();
                     continue; //no more attacking; continue with next unit
+                }
+
+                //no friendly fire
+                if (unit.team.value == attackTarget.team.value)
+                {
+                    unit.RemoveAttackTarget();
+                    continue;
                 }
 
                 int nrCells = _grid.DistanceBetween(unit.location.cell, attackTarget.location.cell);

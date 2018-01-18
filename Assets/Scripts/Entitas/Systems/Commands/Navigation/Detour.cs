@@ -41,6 +41,7 @@ namespace Systems.Command.Navigation
                 {
                     //force calculation of new path with current traverse costs:
                     unit.ReplaceNavigationTarget(cell.iD.value);
+                    unit.isNavigationBlocked = false;
                 }
             }
         }

@@ -56,6 +56,7 @@ namespace Systems.Command.Attack
             {
                 foreach (var unit in _selectedAttackingUnits)
                 {
+                    if (unit.iD.value == targetEntity.iD.value) continue; //don't attack self
                     unit.ReplaceAttackTarget(targetEntity.iD.value);
                 }
             }

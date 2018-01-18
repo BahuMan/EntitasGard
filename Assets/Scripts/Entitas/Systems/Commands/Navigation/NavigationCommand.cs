@@ -13,7 +13,7 @@ namespace Systems.Command.Navigation
         public NavigationCommand(Contexts contexts): base(contexts.input)
         {
             _game = contexts.game;
-            _selectedNavigableUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Navigable, GameMatcher.Selected));
+            _selectedNavigableUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Navigable, GameMatcher.Selected, GameMatcher.UnderControl));
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)
@@ -38,6 +38,7 @@ namespace Systems.Command.Navigation
             }
             foreach (var unit in _selectedNavigableUnits)
             {
+                //if (unit.location.cellid == dest.iD.value) continue; //don't move to current location
                 unit.ReplaceNavigationTarget(dest.iD.value);
             }
         }

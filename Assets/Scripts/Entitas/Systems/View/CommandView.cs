@@ -16,7 +16,7 @@ namespace Systems.View
         {
             _input = contexts.input;
             _UICommands = _input.GetGroup(InputMatcher.UICommand);
-            _allSelected = contexts.game.GetGroup(GameMatcher.Selected);
+            _allSelected = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.UnderControl));
             _panel = GameObject.FindObjectOfType<CommandPanelBehaviour>();
             _panel.AttackCommand += panel_AttackCommand;
             _panel.NavigateCommand += panel_NavigateCommand;
@@ -27,7 +27,6 @@ namespace Systems.View
 
         private void panel_newVehicleCommand()
         {
-            Debug.Log("Build vehicle command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;
@@ -36,7 +35,6 @@ namespace Systems.View
 
         private void panel_BuildTowerCommand()
         {
-            Debug.Log("Build Tower UI command issues");
             foreach (var c in _UICommands.GetEntities()) c.Destroy();
             InputEntity n = _input.CreateEntity();
             n.isUICommand = true;

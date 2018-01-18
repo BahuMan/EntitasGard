@@ -8,25 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly DamageComponent damageComponent = new DamageComponent();
+    public DamageComponent damage { get { return (DamageComponent)GetComponent(GameComponentsLookup.Damage); } }
+    public bool hasDamage { get { return HasComponent(GameComponentsLookup.Damage); } }
 
-    public bool isDamage {
-        get { return HasComponent(GameComponentsLookup.Damage); }
-        set {
-            if (value != isDamage) {
-                var index = GameComponentsLookup.Damage;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : damageComponent;
+    public void AddDamage(int newDamage, int newSrcID) {
+        var index = GameComponentsLookup.Damage;
+        var component = CreateComponent<DamageComponent>(index);
+        component.damage = newDamage;
+        component.srcID = newSrcID;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceDamage(int newDamage, int newSrcID) {
+        var index = GameComponentsLookup.Damage;
+        var component = CreateComponent<DamageComponent>(index);
+        component.damage = newDamage;
+        component.srcID = newSrcID;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveDamage() {
+        RemoveComponent(GameComponentsLookup.Damage);
     }
 }
 

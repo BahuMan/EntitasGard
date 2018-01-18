@@ -9,6 +9,7 @@ public class RootSystem : Feature
 
         Add(new InitHelloWorld(contexts));
         Add(new Systems.Input.MouseInput(contexts));
+        Add(new Systems.Input.SelectionShortcuts(contexts));
         //end of unity-specific systems
 
         Add(new Systems.Command.UnderControlByLocalPlayers(contexts));
@@ -29,6 +30,11 @@ public class RootSystem : Feature
         Add(new Systems.Command.Navigation.UpdateNavigationCostWithOccupiedLocations(contexts));
         Add(new Systems.Command.Navigation.Detour(contexts));
 
+        Add(new Systems.Logic.WeaponApplyDamage(contexts));
+        Add(new Systems.Logic.RecalculateHealth(contexts));
+        //Add(new Systems.Logic.StripKilledObjects(contexts));
+        Add(new Systems.Logic.RemoveKilledEntities(contexts));
+
         //start of unity-specific systems:
         Add(new Systems.View.ShowTeamColor(contexts));
         Add(new Systems.View.MoveToStartPosition(contexts));
@@ -40,6 +46,8 @@ public class RootSystem : Feature
         Add(new Systems.View.ShowHealthBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
         Add(new Systems.View.CommandView(contexts));
+        Add(new Systems.View.DestroyKilledObjects(contexts));
+
         //Add(new Systems.View.MouseHoverDebug(contexts));
         Add(new Systems.View.LogDebugMessageSystem(contexts));
 

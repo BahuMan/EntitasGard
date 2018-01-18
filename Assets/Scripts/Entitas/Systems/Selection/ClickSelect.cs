@@ -43,11 +43,22 @@ namespace Systems.Selection
             //if a ui command is active, this system should not interpret the mouse click as a select action
             if (_UICommands.count > 0) return;
 
-
             var cs = _leftClicks.GetEnumerator();
-            cs.MoveNext();
+            if (!cs.MoveNext()) return;
+
             var clickStart = cs.Current; //there should be exactly one clickStart entity
             var clickEnd = entities[0];  //there should be exactly one clickEnd entity
+
+            if (!clickStart.hasScreenCoordinates)
+            {
+                Debug.LogError("no screencoordinates for click start?");
+                return;
+            }
+            if (!clickEnd.hasScreenCoordinates)
+            {
+                Debug.LogError("no screencoordinates for click end?");
+                return;
+            }
 
             float clickPixelsWidth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);
             float clickPixelsHeighth = Math.Abs(clickEnd.screenCoordinates.x - clickStart.screenCoordinates.x);

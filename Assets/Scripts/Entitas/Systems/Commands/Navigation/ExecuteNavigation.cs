@@ -28,7 +28,12 @@ namespace Systems.Command.Navigation
                 Stack<HexCellBehaviour> path = unit.navigationPath.path;
 
                 if (unit.isNavigationBlocked) continue; //skip blocked units
-
+                if (path.Count < 1)
+                {
+                    unit.RemoveNavigationTarget();
+                    unit.RemoveNavigationPath();
+                    continue;
+                }
                 //four possibilities:
                 //1. we need to rotate before moving towards the next cell
                 //2. we're moving to the next cell but still in our "own" cell

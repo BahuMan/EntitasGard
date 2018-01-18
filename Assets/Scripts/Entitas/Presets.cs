@@ -73,7 +73,7 @@ public class Presets
         ge.AddNavigable(90f, .5f);
         ge.AddHealth(50);
         ge.AddWeaponRotation(0);
-        ge.AddWeapon(2, 45, 2f, 1f); //turret has half turnrate of vehicle to illustrate correction
+        ge.AddWeapon(2, 45, 2f, 1); //turret has half turnrate of vehicle to illustrate correction
 
         return ge;
     }

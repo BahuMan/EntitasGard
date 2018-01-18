@@ -6,7 +6,7 @@ namespace Systems.Command.Attack
 {
     public class AimGun : IExecuteSystem
     {
-        public const float NEAR_ZERO = 5f;
+        public const float NEAR_ZERO = .5f;
         GameContext _game;
         IGroup<GameEntity> _attackingUnits;
 

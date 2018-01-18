@@ -21,28 +21,29 @@ public static class GameComponentsLookup {
     public const int HexCell = 10;
     public const int HexGrid = 11;
     public const int ID = 12;
-    public const int LeaveCell = 13;
-    public const int LocalPlayer = 14;
-    public const int Location = 15;
-    public const int Move = 16;
-    public const int Navigable = 17;
-    public const int NavigationBlocked = 18;
-    public const int NavigationPath = 19;
-    public const int NavigationTarget = 20;
-    public const int RotateWeapon = 21;
-    public const int Selectable = 22;
-    public const int Selected = 23;
-    public const int StartPosition = 24;
-    public const int Team = 25;
-    public const int TimeLine = 26;
-    public const int UnderControl = 27;
-    public const int UnityHealthBox = 28;
-    public const int WeaponAimed = 29;
-    public const int Weapon = 30;
-    public const int WeaponRotation = 31;
-    public const int WorldCoordinates = 32;
+    public const int Killed = 13;
+    public const int LeaveCell = 14;
+    public const int LocalPlayer = 15;
+    public const int Location = 16;
+    public const int Move = 17;
+    public const int Navigable = 18;
+    public const int NavigationBlocked = 19;
+    public const int NavigationPath = 20;
+    public const int NavigationTarget = 21;
+    public const int RotateWeapon = 22;
+    public const int Selectable = 23;
+    public const int Selected = 24;
+    public const int StartPosition = 25;
+    public const int Team = 26;
+    public const int TimeLine = 27;
+    public const int UnderControl = 28;
+    public const int UnityHealthBox = 29;
+    public const int WeaponAimed = 30;
+    public const int Weapon = 31;
+    public const int WeaponRotation = 32;
+    public const int WorldCoordinates = 33;
 
-    public const int TotalComponents = 33;
+    public const int TotalComponents = 34;
 
     public static readonly string[] componentNames = {
         "AIPlayer",
@@ -58,6 +59,7 @@ public static class GameComponentsLookup {
         "HexCell",
         "HexGrid",
         "ID",
+        "Killed",
         "LeaveCell",
         "LocalPlayer",
         "Location",
@@ -94,6 +96,7 @@ public static class GameComponentsLookup {
         typeof(HexCellComponent),
         typeof(HexGridComponent),
         typeof(IDComponent),
+        typeof(KilledComponent),
         typeof(LeaveCell),
         typeof(LocalPlayerComponent),
         typeof(LocationComponent),

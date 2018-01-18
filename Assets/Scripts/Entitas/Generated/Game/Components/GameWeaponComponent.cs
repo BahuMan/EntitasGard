@@ -11,7 +11,7 @@ public partial class GameEntity {
     public WeaponComponent weapon { get { return (WeaponComponent)GetComponent(GameComponentsLookup.Weapon); } }
     public bool hasWeapon { get { return HasComponent(GameComponentsLookup.Weapon); } }
 
-    public void AddWeapon(int newRange, float newRotationSpeed, float newRateOfFire, float newDmg) {
+    public void AddWeapon(int newRange, float newRotationSpeed, float newRateOfFire, int newDmg) {
         var index = GameComponentsLookup.Weapon;
         var component = CreateComponent<WeaponComponent>(index);
         component.range = newRange;
@@ -21,7 +21,7 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceWeapon(int newRange, float newRotationSpeed, float newRateOfFire, float newDmg) {
+    public void ReplaceWeapon(int newRange, float newRotationSpeed, float newRateOfFire, int newDmg) {
         var index = GameComponentsLookup.Weapon;
         var component = CreateComponent<WeaponComponent>(index);
         component.range = newRange;
