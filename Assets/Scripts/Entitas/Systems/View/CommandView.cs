@@ -10,6 +10,7 @@ namespace Systems.View
         private IGroup<GameEntity> _allSelected;
         private InputContext _input;
         private IGroup<InputEntity> _UICommands;
+        private IGroup<GameEntity> _localPlayers;
 
         public CommandView(Contexts contexts) : base(contexts.game)
         {
@@ -73,7 +74,7 @@ namespace Systems.View
 
         protected override bool Filter(GameEntity entity)
         {
-            return entity.hasGameObject;
+            return entity.hasGameObject; // && entity.isUnderControl;
         }
 
         protected override void Execute(List<GameEntity> entities)

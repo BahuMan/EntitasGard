@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly UnitComponent unitComponent = new UnitComponent();
+    static readonly LocalPlayerComponent localPlayerComponent = new LocalPlayerComponent();
 
-    public bool isUnit {
-        get { return HasComponent(GameComponentsLookup.Unit); }
+    public bool isLocalPlayer {
+        get { return HasComponent(GameComponentsLookup.LocalPlayer); }
         set {
-            if (value != isUnit) {
-                var index = GameComponentsLookup.Unit;
+            if (value != isLocalPlayer) {
+                var index = GameComponentsLookup.LocalPlayer;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : unitComponent;
+                            : localPlayerComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherUnit;
+    static Entitas.IMatcher<GameEntity> _matcherLocalPlayer;
 
-    public static Entitas.IMatcher<GameEntity> Unit {
+    public static Entitas.IMatcher<GameEntity> LocalPlayer {
         get {
-            if (_matcherUnit == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Unit);
+            if (_matcherLocalPlayer == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.LocalPlayer);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherUnit = matcher;
+                _matcherLocalPlayer = matcher;
             }
 
-            return _matcherUnit;
+            return _matcherLocalPlayer;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Systems.Command.Attack
         public DefaultRightClickAttackCommand(Contexts contexts): base(contexts.input)
         {
             _game = contexts.game;
-            _selectedAttackingUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Weapon));
+            _selectedAttackingUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Weapon, GameMatcher.UnderControl));
         }
 
         protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)

@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using Index;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class EntitasGameController : MonoBehaviour {
 
@@ -12,13 +13,48 @@ public class EntitasGameController : MonoBehaviour {
         _systems = new RootSystem(Contexts.sharedInstance);
         _systems.Initialize();
 
-        //create entities for entire grid with hexes:
         HexGridBehaviour grid = GameObject.FindObjectOfType<HexGridBehaviour>();
-        TurnGridToEntities(Contexts.sharedInstance.game, grid);
+        GameContext game = Contexts.sharedInstance.game;
+        Presets preset = new Presets(game, grid);
 
-        //create entities for any other scene object:
-        FindEntitiesInUnity(Contexts.sharedInstance.game, grid);
+        TurnGridToEntities(game, grid);
+        FindEntitiesInUnity(game, preset);
+        SetupPlayers(game, preset, grid);
 	}
+
+    private void SetupPlayers(GameContext game, Presets preset, HexGridBehaviour grid)
+    {
+        PlayerListData pld = GameObject.FindObjectOfType<PlayerListData>();
+        if (pld != null)
+        {
+            IEnumerator<Vector3> basePos = CoordinatesForBases(grid);
+            foreach (var player in pld._model)
+            {
+
+                GameEntity pEntity = game.CreateEntity();
+                pEntity.AddTeam(player.Color);
+                pEntity.isLocalPlayer = (player.Type == PlayerTypeEnum.Human);
+                pEntity.isAIPlayer = (player.Type == PlayerTypeEnum.AI);
+
+                basePos.MoveNext();
+                GameEntity baseEntity = preset.CreateBlueprint(Presets.EntitasPresetEnum.BASE);
+                HexCellBehaviour home = grid.GetCell(basePos.Current);
+                baseEntity.ReplaceLocation(home, home.GetComponent<EntitasLink>().id);
+                baseEntity.ReplaceTeam(player.Color);
+                baseEntity.ReplaceStartPosition(home.transform.position.x, home.transform.position.y, home.transform.position.z);
+            }
+        }
+    }
+
+    private IEnumerator<Vector3> CoordinatesForBases(HexGridBehaviour grid)
+    {
+        yield return new Vector3(0, -grid.size, grid.size);
+        yield return new Vector3(-grid.size, grid.size, 0);
+        yield return new Vector3(grid.size, 0, -grid.size);
+        yield return new Vector3(0, grid.size, -grid.size);
+        yield return new Vector3(-grid.size, 0, -grid.size);
+        yield return new Vector3(grid.size, -grid.size, 0);
+    }
 
     private void TurnGridToEntities(GameContext game, HexGridBehaviour grid)
     {
@@ -41,9 +77,8 @@ public class EntitasGameController : MonoBehaviour {
         }
     }
 
-    private void FindEntitiesInUnity(GameContext game, HexGridBehaviour grid)
+    private void FindEntitiesInUnity(GameContext game, Presets preset)
     {
-        Presets preset = new Presets(game, grid);
         EntitasInit[] toEntitas = GameObject.FindObjectsOfType<EntitasInit>();
         foreach (var u in toEntitas)
         {

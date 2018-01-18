@@ -17,14 +17,11 @@ public class HexCellBehaviour : MonoBehaviour {
     [SerializeField]
     private Material _highLight;
     private Material _standard;
-
-#pragma warning disable 0649
     [SerializeField]
     private Renderer _model;
-#pragma warning disable 0649
     [SerializeField]
     private Renderer _N, _S, _NE, _SE, _NW, _SW;
-
+#pragma warning restore 0649
 
     private void Awake()
     {

@@ -22,10 +22,10 @@ public class Presets
     {
         switch (preset)
         {
-            case EntitasPresetEnum.BASE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Base"));
-            case EntitasPresetEnum.BARRACKS: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Barracks"));
-            case EntitasPresetEnum.VEHICLE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Unit"));
-            case EntitasPresetEnum.TURRET: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("DefenseTower"));
+            case EntitasPresetEnum.BASE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Prefabs/Base"));
+            case EntitasPresetEnum.BARRACKS: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Prefabs/Barracks"));
+            case EntitasPresetEnum.VEHICLE: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Prefabs/Unit"));
+            case EntitasPresetEnum.TURRET: return GameObject.Instantiate<EntitasInit>(Resources.Load<EntitasInit>("Prefabs/DefenseTower"));
         }
         Debug.LogError("Preset code couldn't create Unity prefab for " + System.Enum.GetName(typeof(EntitasPresetEnum), preset));
         return null;
@@ -59,7 +59,6 @@ public class Presets
     {
         GameEntity ge = CreateCommon(unityObject);
         ge.isSelectable = true;
-        ge.isUnit = true;
         ge.AddHealth(200);
         ge.AddWeapon(3, 90f, 2f, 2);
         ge.AddWeaponRotation(0f);
@@ -71,7 +70,6 @@ public class Presets
     {
         GameEntity ge = CreateCommon(unityObject);
 
-        ge.isUnit = true;
         ge.AddNavigable(90f, .5f);
         ge.AddHealth(50);
         ge.AddWeaponRotation(0);

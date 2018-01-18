@@ -11,13 +11,18 @@ namespace Systems.Command.UI
         private GameContext _game;
         private HexGridBehaviour _grid;
         private IGroup<InputEntity> _UICommands;
+        private IGroup<GameEntity> _selectedBarracksBuilders;
+        private IGroup<GameEntity> _selectedTowerBuilders;
 
         public BuildCommands(Contexts contexts): base(contexts.input)
         {
-            _UICommands = contexts.input.GetGroup(InputMatcher.AnyOf(InputMatcher.UIBuildBarracks, InputMatcher.UIBuildTower));
             _game = contexts.game;
             _grid = UnityEngine.GameObject.FindObjectOfType<HexGridBehaviour>();
             _presets = new Presets(_game, _grid);
+
+            _UICommands = contexts.input.GetGroup(InputMatcher.AnyOf(InputMatcher.UIBuildBarracks, InputMatcher.UIBuildTower));
+            _selectedBarracksBuilders = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.CanBuildBarracks));
+            _selectedTowerBuilders = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.CanBuildBarracks));
         }
 
         protected override void Execute(List<InputEntity> entities)
@@ -41,28 +46,33 @@ namespace Systems.Command.UI
             {
                 if (ui.isUIBuildBarracks) BuildBarracks(overEntity);
                 if (ui.isUIBuildTower) BuildTower(overEntity);
-                if (ui.isUINewVehicle) BuildNewVehicle(overEntity);
                 ui.Destroy();
             }
         }
 
         private void BuildBarracks(GameEntity location)
         {
+            GameEntity homebase = GetFirst(_selectedBarracksBuilders);
             GameEntity b = _presets.CreateBlueprint(Presets.EntitasPresetEnum.BARRACKS);
             b.AddStartPosition(location.hexCell.worldx, location.hexCell.worldy, location.hexCell.worldz);
             b.ReplaceLocation(location.gameObject.value.GetComponent<HexCellBehaviour>(), location.iD.value);
+            b.ReplaceTeam(homebase.team.value);
         }
 
         private void BuildTower(GameEntity location)
         {
+            GameEntity homebase = GetFirst(_selectedTowerBuilders);
             GameEntity b = _presets.CreateBlueprint(Presets.EntitasPresetEnum.TURRET);
             b.AddStartPosition(location.hexCell.worldx, location.hexCell.worldy, location.hexCell.worldz);
             b.ReplaceLocation(location.gameObject.value.GetComponent<HexCellBehaviour>(), location.iD.value);
+            b.ReplaceTeam(homebase.team.value);
         }
 
-        private void BuildNewVehicle(GameEntity location)
+        private GameEntity GetFirst(IGroup<GameEntity> grp)
         {
-            throw new NotImplementedException();
+            IEnumerator<GameEntity> bb = _selectedBarracksBuilders.GetEnumerator();
+            bb.MoveNext();
+            return bb.Current;
         }
 
         protected override bool Filter(InputEntity entity)

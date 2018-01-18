@@ -91,6 +91,8 @@ namespace Systems.Selection
         private void PerformClickSelect(InputEntity clickStart, InputEntity clickEnd)
         {
             ClearSelection();
+            if (!clickEnd.hasMouseOverEntity) return;
+
             GameEntity ge = _game.GetEntityWithID(clickEnd.mouseOverEntity.value);
             if (ge.isSelectable)
             {

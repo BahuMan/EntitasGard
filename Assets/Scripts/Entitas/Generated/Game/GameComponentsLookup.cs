@@ -8,40 +8,44 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int AttackTarget = 0;
-    public const int CanBuildBarracks = 1;
-    public const int CanBuildTower = 2;
-    public const int CanBuildVehicle = 3;
-    public const int Damage = 4;
-    public const int DebugMessage = 5;
-    public const int FireWeapon = 6;
-    public const int GameObject = 7;
-    public const int Health = 8;
-    public const int HexCell = 9;
-    public const int HexGrid = 10;
-    public const int ID = 11;
-    public const int LeaveCell = 12;
-    public const int Location = 13;
-    public const int Move = 14;
-    public const int Navigable = 15;
-    public const int NavigationBlocked = 16;
-    public const int NavigationPath = 17;
-    public const int NavigationTarget = 18;
-    public const int RotateWeapon = 19;
-    public const int Selectable = 20;
-    public const int Selected = 21;
-    public const int StartPosition = 22;
-    public const int Team = 23;
-    public const int TimeLine = 24;
-    public const int Unit = 25;
-    public const int WeaponAimed = 26;
-    public const int Weapon = 27;
-    public const int WeaponRotation = 28;
-    public const int WorldCoordinates = 29;
+    public const int AIPlayer = 0;
+    public const int AttackTarget = 1;
+    public const int CanBuildBarracks = 2;
+    public const int CanBuildTower = 3;
+    public const int CanBuildVehicle = 4;
+    public const int Damage = 5;
+    public const int DebugMessage = 6;
+    public const int FireWeapon = 7;
+    public const int GameObject = 8;
+    public const int Health = 9;
+    public const int HexCell = 10;
+    public const int HexGrid = 11;
+    public const int ID = 12;
+    public const int LeaveCell = 13;
+    public const int LocalPlayer = 14;
+    public const int Location = 15;
+    public const int Move = 16;
+    public const int Navigable = 17;
+    public const int NavigationBlocked = 18;
+    public const int NavigationPath = 19;
+    public const int NavigationTarget = 20;
+    public const int RotateWeapon = 21;
+    public const int Selectable = 22;
+    public const int Selected = 23;
+    public const int StartPosition = 24;
+    public const int Team = 25;
+    public const int TimeLine = 26;
+    public const int UnderControl = 27;
+    public const int UnityHealthBox = 28;
+    public const int WeaponAimed = 29;
+    public const int Weapon = 30;
+    public const int WeaponRotation = 31;
+    public const int WorldCoordinates = 32;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 33;
 
     public static readonly string[] componentNames = {
+        "AIPlayer",
         "AttackTarget",
         "CanBuildBarracks",
         "CanBuildTower",
@@ -55,6 +59,7 @@ public static class GameComponentsLookup {
         "HexGrid",
         "ID",
         "LeaveCell",
+        "LocalPlayer",
         "Location",
         "Move",
         "Navigable",
@@ -67,7 +72,8 @@ public static class GameComponentsLookup {
         "StartPosition",
         "Team",
         "TimeLine",
-        "Unit",
+        "UnderControl",
+        "UnityHealthBox",
         "WeaponAimed",
         "Weapon",
         "WeaponRotation",
@@ -75,6 +81,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AIPlayerComponent),
         typeof(AttackTargetComponent),
         typeof(CanBuildBarracks),
         typeof(CanBuildTower),
@@ -88,6 +95,7 @@ public static class GameComponentsLookup {
         typeof(HexGridComponent),
         typeof(IDComponent),
         typeof(LeaveCell),
+        typeof(LocalPlayerComponent),
         typeof(LocationComponent),
         typeof(MoveComponent),
         typeof(NavigableComponent),
@@ -100,7 +108,8 @@ public static class GameComponentsLookup {
         typeof(StartPositionComponent),
         typeof(TeamComponent),
         typeof(TimeLineComponent),
-        typeof(UnitComponent),
+        typeof(UnderControlComponent),
+        typeof(UnityHealthBox),
         typeof(WeaponAimed),
         typeof(WeaponComponent),
         typeof(WeaponRotation),

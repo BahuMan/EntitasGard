@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,7 +48,7 @@ public class SelectedContainerBehaviour : MonoBehaviour {
         thumb.gameObject.SetActive(true);
         thumb.transform.GetChild(0).GetComponent<Text>().text = sel.name;
         thumb.transform.GetChild(1).GetComponent<Image>().sprite = selectable.Thumbnail;
-        thumb.onClick.AddListener(() => { if (UnselectRequested != null) UnselectRequested.Invoke(sel); });
+        thumb.onClick.AddListener(() => { if (SelectRequested != null) SelectRequested.Invoke(sel); });
 
         forward[sel] = thumb;
         reverse[thumb] = sel;

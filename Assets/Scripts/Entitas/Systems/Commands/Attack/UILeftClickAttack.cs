@@ -13,7 +13,7 @@ namespace Systems.Command.Attack
         public UILeftClickAttack(Contexts contexts) : base(contexts.input)
         {
             _game = contexts.game;
-            _selectedAttackingUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Weapon));
+            _selectedAttackingUnits = _game.GetGroup(GameMatcher.AllOf(GameMatcher.Selected, GameMatcher.Weapon, GameMatcher.UnderControl));
             _UICommands = contexts.input.GetGroup(InputMatcher.UICommand);
         }
 

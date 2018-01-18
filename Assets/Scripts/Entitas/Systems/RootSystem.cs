@@ -11,6 +11,8 @@ public class RootSystem : Feature
         Add(new Systems.Input.MouseInput(contexts));
         //end of unity-specific systems
 
+        Add(new Systems.Command.UnderControlByLocalPlayers(contexts));
+
         Add(new Systems.Selection.ClickSelect(contexts));
         Add(new Systems.Command.UI.BuildCommands(contexts));
         Add(new Systems.Command.UI.NewUnitCommand(contexts));
@@ -28,12 +30,14 @@ public class RootSystem : Feature
         Add(new Systems.Command.Navigation.Detour(contexts));
 
         //start of unity-specific systems:
+        Add(new Systems.View.ShowTeamColor(contexts));
         Add(new Systems.View.MoveToStartPosition(contexts));
         Add(new Systems.View.ShowEnRoute(contexts));
         Add(new Systems.View.MoveInUnity(contexts));
         Add(new Systems.View.Attack.RotateTurretInUnity(contexts)); //must come after MoveInUnity
         Add(new Systems.View.Attack.FireWeaponInUnity(contexts));
         Add(new Systems.View.ShowSelectionBox(contexts));
+        Add(new Systems.View.ShowHealthBox(contexts));
         Add(new Systems.View.SelectionView(contexts));
         Add(new Systems.View.CommandView(contexts));
         //Add(new Systems.View.MouseHoverDebug(contexts));
