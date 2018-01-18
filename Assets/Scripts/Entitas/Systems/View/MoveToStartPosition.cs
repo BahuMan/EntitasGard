@@ -18,6 +18,7 @@ namespace Systems.View
                 Transform t = e.gameObject.value.transform;
                 Vector3 pos = new Vector3(e.startPosition.x, e.startPosition.y, e.startPosition.z);
                 t.position = pos;
+                e.ReplaceWorldCoordinates(pos.x, pos.y, pos.z, t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.z);
             }
         }
 

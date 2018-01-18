@@ -49,7 +49,7 @@ public class Presets
     {
         GameEntity ge = CreateCommon(unityObject);
 
-        ge.AddHealth(500);
+        ge.AddHealth(120);
         ge.isCanBuildTower = true;
         ge.isCanBuildBarracks = true;
         return ge;
@@ -59,7 +59,7 @@ public class Presets
     {
         GameEntity ge = CreateCommon(unityObject);
         ge.isSelectable = true;
-        ge.AddHealth(200);
+        ge.AddHealth(50);
         ge.AddWeapon(3, 90f, 2f, 2);
         ge.AddWeaponRotation(0f);
 
@@ -71,7 +71,7 @@ public class Presets
         GameEntity ge = CreateCommon(unityObject);
 
         ge.AddNavigable(90f, .5f);
-        ge.AddHealth(50);
+        ge.AddHealth(10);
         ge.AddWeaponRotation(0);
         ge.AddWeapon(2, 45, 2f, 1); //turret has half turnrate of vehicle to illustrate correction
 
@@ -82,7 +82,7 @@ public class Presets
     {
         GameEntity ge = CreateCommon(unityObject);
 
-        ge.AddHealth(500);
+        ge.AddHealth(40);
         ge.isCanBuildVehicle = true;
 
         return ge;
