@@ -53,7 +53,7 @@ namespace Systems.Command.Navigation
                         unit.RemoveNavigationTarget();
                     }
 
-                    break;
+                    continue;
                 }
 
                 float fromdist = CalcSqrDistance(unit.worldCoordinates, curCell);
@@ -74,7 +74,7 @@ namespace Systems.Command.Navigation
                 {
                     //2.we're pointed at next cell but still in our own
                     unit.ReplaceMove(dir.x, dir.z, roty);
-                    break;
+                    continue;
                 }
 
                 //1. not oriented towards destination cell; unit should only rotate and not move
