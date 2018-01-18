@@ -21,8 +21,12 @@ namespace Systems.View
             {
                 if (e.isKilled || !e.hasHealth)
                 {
-                    GameObject.Destroy(e.unityHealthBox.value.gameObject);
-                    e.RemoveUnityHealthBox();
+                    Debug.Log("removing healthbox");
+                    if (e.hasUnityHealthBox)
+                    {
+                        GameObject.Destroy(e.unityHealthBox.value.gameObject);
+                        e.RemoveUnityHealthBox();
+                    }
                 }
                 else if (e.hasHealth)
                 {

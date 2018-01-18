@@ -18,9 +18,14 @@ namespace Systems.Command.Attack
 
         void IExecuteSystem.Execute()
         {
-            foreach (var attacker in _attackingUnits)
+            foreach (var attacker in _attackingUnits.GetEntities())
             {
                 GameEntity defender = _game.GetEntityWithID(attacker.attackTarget.targetID);
+                if (defender == null)
+                {
+                    attacker.RemoveAttackTarget();
+                    continue;
+                }
                 float mustRotate = CalcRotationY(attacker.worldCoordinates, defender.worldCoordinates, attacker.weapon, attacker.weaponRotation);
                 if (Math.Abs(mustRotate) < NEAR_ZERO)
                 {
