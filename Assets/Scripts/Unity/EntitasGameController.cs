@@ -44,6 +44,16 @@ public class EntitasGameController : MonoBehaviour {
                 baseEntity.ReplaceStartPosition(home.transform.position.x, home.transform.position.y, home.transform.position.z);
             }
         }
+        else
+        {
+            Debug.Log("No player setup found; I'm assuming this scene was started in Unity Editor for debugging purposes");
+
+            GameEntity pEntity = game.CreateEntity();
+            pEntity.AddTeam(0);
+            pEntity.isLocalPlayer = true;
+            pEntity.isAIPlayer = false;
+
+        }
     }
 
     private IEnumerator<Vector3> CoordinatesForBases(HexGridBehaviour grid)

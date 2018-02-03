@@ -10,44 +10,48 @@ public static class GameComponentsLookup {
 
     public const int AIPlayer = 0;
     public const int AttackTarget = 1;
-    public const int CanBuildBarracks = 2;
-    public const int CanBuildTower = 3;
-    public const int CanBuildVehicle = 4;
-    public const int Damage = 5;
-    public const int DebugMessage = 6;
-    public const int FireWeapon = 7;
-    public const int GameObject = 8;
-    public const int Health = 9;
-    public const int HexCell = 10;
-    public const int HexGrid = 11;
-    public const int ID = 12;
-    public const int Killed = 13;
-    public const int LeaveCell = 14;
-    public const int LocalPlayer = 15;
-    public const int Location = 16;
-    public const int Move = 17;
-    public const int Navigable = 18;
-    public const int NavigationBlocked = 19;
-    public const int NavigationPath = 20;
-    public const int NavigationTarget = 21;
-    public const int RotateWeapon = 22;
-    public const int Selectable = 23;
-    public const int Selected = 24;
-    public const int StartPosition = 25;
-    public const int Team = 26;
-    public const int TimeLine = 27;
-    public const int UnderControl = 28;
-    public const int UnityHealthBox = 29;
-    public const int WeaponAimed = 30;
-    public const int Weapon = 31;
-    public const int WeaponRotation = 32;
-    public const int WorldCoordinates = 33;
+    public const int AutoAttack = 2;
+    public const int AutoAttacking = 3;
+    public const int CanBuildBarracks = 4;
+    public const int CanBuildTower = 5;
+    public const int CanBuildVehicle = 6;
+    public const int Damage = 7;
+    public const int DebugMessage = 8;
+    public const int FireWeapon = 9;
+    public const int GameObject = 10;
+    public const int Health = 11;
+    public const int HexCell = 12;
+    public const int HexGrid = 13;
+    public const int ID = 14;
+    public const int Killed = 15;
+    public const int LeaveCell = 16;
+    public const int LocalPlayer = 17;
+    public const int Location = 18;
+    public const int Move = 19;
+    public const int Navigable = 20;
+    public const int NavigationBlocked = 21;
+    public const int NavigationPath = 22;
+    public const int NavigationTarget = 23;
+    public const int RotateWeapon = 24;
+    public const int Selectable = 25;
+    public const int Selected = 26;
+    public const int StartPosition = 27;
+    public const int Team = 28;
+    public const int TimeLine = 29;
+    public const int UnderControl = 30;
+    public const int UnityHealthBox = 31;
+    public const int WeaponAimed = 32;
+    public const int Weapon = 33;
+    public const int WeaponRotation = 34;
+    public const int WorldCoordinates = 35;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "AIPlayer",
         "AttackTarget",
+        "AutoAttack",
+        "AutoAttacking",
         "CanBuildBarracks",
         "CanBuildTower",
         "CanBuildVehicle",
@@ -85,6 +89,8 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AIPlayerComponent),
         typeof(AttackTargetComponent),
+        typeof(AutoAttack),
+        typeof(AutoAttacking),
         typeof(CanBuildBarracks),
         typeof(CanBuildTower),
         typeof(CanBuildVehicle),

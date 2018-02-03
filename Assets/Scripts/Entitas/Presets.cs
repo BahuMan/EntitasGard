@@ -62,6 +62,7 @@ public class Presets
         ge.AddHealth(50);
         ge.AddWeapon(3, 90f, 2f, 2);
         ge.AddWeaponRotation(0f);
+        ge.isAutoAttack = true; //this turret automatically engages enemies within rage
 
         return ge;
     }

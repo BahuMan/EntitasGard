@@ -260,6 +260,30 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
         }
     }
 
+    public List<HexCellBehaviour> GetWithinRange(int cellRange, Vector3 center)
+    {
+        List<HexCellBehaviour> result = new List<HexCellBehaviour>();
+
+        //two temp variables to calculate the cell's coordinates:
+        int centerx = (int)center.x;
+        int centery = (int)center.y;
+
+        int fromx = Math.Max(centerx - cellRange, -size);
+        int tox = Math.Min(size, centerx + cellRange);
+
+        for (int gx = fromx; gx <= tox; ++gx)
+        {
+            int fromy = Math.Max(Math.Max(centery - cellRange, centery - gx + centerx - cellRange), -size);
+            int toy = Math.Min(Math.Min(centery + cellRange, centery - gx + centerx + cellRange), size);
+            for (int gy = fromy; gy <= toy; ++gy)
+            {
+                result.Add(GetCell(gx, gy));
+            }
+        }
+
+        return result;
+    }
+
     public Vector3 axial_to_pixel(Vector2 hex)
     {
         Vector3 r = new Vector3();

@@ -30,12 +30,15 @@ public class RootSystem : Feature
         Add(new Systems.Command.Navigation.UpdateNavigationCostWithOccupiedLocations(contexts));
         Add(new Systems.Command.Navigation.Detour(contexts));
 
+        Add(new Systems.Ai.AutoAttack(contexts));
+
         Add(new Systems.Logic.WeaponApplyDamage(contexts));
         Add(new Systems.Logic.RecalculateHealth(contexts));
         //Add(new Systems.Logic.StripKilledObjects(contexts));
         Add(new Systems.Logic.RemoveKilledEntities(contexts));
 
         //start of unity-specific systems:
+        Add(new Systems.Command.ShowWeaponRange(contexts)); //debug
         Add(new Systems.View.ShowTeamColor(contexts));
         Add(new Systems.View.MoveToStartPosition(contexts));
         Add(new Systems.View.ShowEnRoute(contexts));
