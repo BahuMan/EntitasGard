@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Entitas;
-using FluentBehaviourTree;
 using System.Collections.Generic;
 using Systems.Ai.Behaviour;
 
@@ -38,7 +37,7 @@ namespace Systems.Ai
         {
             foreach(var ai in _aiPlayers)
             {
-                _aiTree[ai.team.value].Tick(new TimeData(Time.deltaTime));
+                _aiTree[ai.team.value].Tick();
             }
         }
         public GameEntity BarrackForTeam(int teamNr)

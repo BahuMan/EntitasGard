@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
-using FluentBehaviourTree;
 using System.Collections.Generic;
+using SimpleBehaviour;
 
 namespace Systems.Ai.Behaviour
 {
     public class StupidBehaviour: IAIBehaviour
     {
-        private IBehaviourTreeNode _tree;
+        private INode _tree;
 
         //variables used during behavior tree decision process:
         private GameContext _game;
@@ -21,31 +21,29 @@ namespace Systems.Ai.Behaviour
             _allPlayers = allplayers;
             _grid = GameObject.FindObjectOfType<HexGridBehaviour>();
 
-            var builder = new BehaviourTreeBuilder();
-            builder.Sequence("BuildBarracks")
-                .Inverter("not").Condition("HasBarracks", t => HasBarracks(t, playa)).End()
-                .Do("BuildBarracks", t => BuildBarracks(t, playa))
-                .End();
+            _tree = new Sequence(
+                new Inverter(new Condition(() => HasBarracks(playa))),
+                new Action(() => BuildBarracks(playa))
+                );
 
-            _tree = builder.Build();
         }
 
-        public void Tick(TimeData t)
+        public void Tick()
         {
-            _tree.Tick(t);
+            _tree.Tick();
         }
 
-        private bool HasBarracks(TimeData t, GameEntity playa)
+        private bool HasBarracks(GameEntity playa)
         {
             int team = playa.team.value;
             return null != _allPlayers.BarrackForTeam(team);
         }
 
-        private BehaviourTreeStatus BuildBarracks(TimeData t, GameEntity playa)
+        private TreeStatusEnum BuildBarracks(GameEntity playa)
         {
             int team = playa.team.value;
             GameEntity home = _allPlayers.BaseForTeam(team);
-            if (home == null) return BehaviourTreeStatus.Failure; //no home base => we are dead
+            if (home == null) return TreeStatusEnum.FAILURE; //no home base => we are dead
 
             List<HexCellBehaviour> hood = _grid.GetWithinRange(3, home.location.cell.cubeCoordinates);
 
@@ -67,7 +65,7 @@ namespace Systems.Ai.Behaviour
                     hood.RemoveAt(chosen);
                 }
             }
-            return BehaviourTreeStatus.Failure;
+            return TreeStatusEnum.FAILURE;
         }
 
     }

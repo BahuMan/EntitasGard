@@ -277,7 +277,8 @@ public class HexGridBehaviour : MonoBehaviour, IEnumerable<HexCellBehaviour>
             int toy = Math.Min(Math.Min(centery + cellRange, centery - gx + centerx + cellRange), size);
             for (int gy = fromy; gy <= toy; ++gy)
             {
-                result.Add(GetCell(gx, gy));
+                HexCellBehaviour c = GetCell(gx, gy);
+                if (c!= null) result.Add(c);
             }
         }
 

@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
-using Entitas;
-using FluentBehaviourTree;
-using System;
 using System.Collections.Generic;
+using SimpleBehaviour;
 
 public class AutoAttackNearestBehaviour
 {
     private GameContext _game;
     private GameEntity _turret;
     private HexGridBehaviour _grid;
-    private IBehaviourTreeNode _tree;
+    private INode _tree;
     private int[] _CellIdInRange;
     private List<HexCellBehaviour> inRange;
     private GameEntity closestEnemy = null;
@@ -27,42 +25,41 @@ public class AutoAttackNearestBehaviour
 
         inRange = _grid.GetWithinRange(_turret.weapon.range, _turret.location.cell.cubeCoordinates);
         _CellIdInRange = new int[inRange.Count];
-        //for(int i=0; i<_CellIdInRange.Length; ++i)
-        //{
-        //    _CellIdInRange[i] = inRange[i].GetComponent<EntitasLink>().id;
-        //}
+        for (int i = 0; i < _CellIdInRange.Length; ++i)
+        {
+            _CellIdInRange[i] = inRange[i].GetComponent<EntitasLink>().id;
+        }
 
-        _tree = new BehaviourTreeBuilder()
-            .Sequence("turret main loop")
-                .Selector("find target")
-                    .Do("keep existing target", KeepExistingTarget)
-                    .Do("Find new Target", FindClosestEnemy)
-                .End()
-                .Do("AttackTarget", AttackTarget)
-            .End()
-            .Build();
+        _tree =
+            new Sequence(
+                new Selector(
+                    new Action(KeepExistingTarget),
+                    new Action(FindClosestEnemy)
+                    ),
+                new Action(AttackTarget)
+                );
     }
 
-    private BehaviourTreeStatus KeepExistingTarget(TimeData t)
+    private TreeStatusEnum KeepExistingTarget()
     {
-        if (!_turret.hasAttackTarget) return BehaviourTreeStatus.Failure;
-        if (!_turret.isAutoAttacking) return BehaviourTreeStatus.Success;
+        if (!_turret.hasAttackTarget) return TreeStatusEnum.FAILURE;
+        if (!_turret.isAutoAttacking) return TreeStatusEnum.SUCCESS;
 
         GameEntity target = _game.GetEntityWithID(_turret.attackTarget.targetID);
 
         //target still alive?
-        if (target == null) return BehaviourTreeStatus.Failure;
-        if (target.health.value < 0) return BehaviourTreeStatus.Failure;
-        if (target.isKilled) return BehaviourTreeStatus.Failure;
+        if (target == null) return TreeStatusEnum.FAILURE;
+        if (target.health.value < 0) return TreeStatusEnum.FAILURE;
+        if (target.isKilled) return TreeStatusEnum.FAILURE;
 
         //out of range?
         int distance = _grid.DistanceBetween(_turret.location.cell, target.location.cell);
-        if (distance > _turret.weapon.range) return BehaviourTreeStatus.Failure;
+        if (distance > _turret.weapon.range) return TreeStatusEnum.FAILURE;
 
-        return BehaviourTreeStatus.Success;
+        return TreeStatusEnum.SUCCESS;
     }
 
-    private BehaviourTreeStatus FindClosestEnemy(TimeData t)
+    private TreeStatusEnum FindClosestEnemy()
     {
         if (_turret.hasAttackTarget && _turret.isAutoAttacking) _turret.RemoveAttackTarget();
 
@@ -83,7 +80,7 @@ public class AutoAttackNearestBehaviour
             }
         }
 
-        return closestEnemy == null ? BehaviourTreeStatus.Failure : BehaviourTreeStatus.Success;
+        return closestEnemy == null ? TreeStatusEnum.FAILURE : TreeStatusEnum.SUCCESS;
     }
 
     private bool IsEnemy(GameEntity candidate)
@@ -91,32 +88,32 @@ public class AutoAttackNearestBehaviour
         return _turret.team.value != candidate.team.value;
     }
 
-    private BehaviourTreeStatus AttackTarget(TimeData t)
+    private TreeStatusEnum AttackTarget()
     {
-        if (closestEnemy == null) return BehaviourTreeStatus.Failure;
+        if (closestEnemy == null) return TreeStatusEnum.FAILURE;
 
         //were we here before? If so, only count the time
         if (_currentAttackDelayed != 0f)
         {
-            _currentAttackDelayed += t.deltaTime;
+            _currentAttackDelayed += Time.deltaTime;
             if (_currentAttackDelayed > ATTACK_DELAY)
             {
                 _currentAttackDelayed = 0;
-                return BehaviourTreeStatus.Success;
+                return TreeStatusEnum.SUCCESS;
             }
             else
             {
-                return BehaviourTreeStatus.Running;
+                return TreeStatusEnum.RUNNING;
             }
         }
         _turret.ReplaceAttackTarget(closestEnemy.iD.value);
         _turret.isAutoAttacking = true;
         _currentAttackDelayed = float.Epsilon;
-        return BehaviourTreeStatus.Running;
+        return TreeStatusEnum.RUNNING;
     }
 
-    public void Tick(TimeData t)
+    public void Tick()
     {
-        _tree.Tick(t);
+        _tree.Tick();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Entitas;
-using FluentBehaviourTree;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,22 +18,17 @@ namespace Systems.Ai
             _grid = GameObject.FindObjectOfType<HexGridBehaviour>();
 
             _treeForAttacker = new Dictionary<int, AutoAttackNearestBehaviour>();
-            foreach(var attacker in _autoAttacking)
-            {
-                _treeForAttacker[attacker.iD.value] = new AutoAttackNearestBehaviour(_game, attacker, _grid);
-            }
         }
 
         public void Execute()
         {
-            TimeData td = new TimeData(Time.deltaTime);
             foreach (var attacker in _autoAttacking)
             {
                 if (!_treeForAttacker.ContainsKey(attacker.iD.value))
                 {
                     _treeForAttacker[attacker.iD.value] = new AutoAttackNearestBehaviour(_game, attacker, _grid);
                 }
-                _treeForAttacker[attacker.iD.value].Tick(td);
+                _treeForAttacker[attacker.iD.value].Tick();
             }
         }
     }
